@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PelayananDesa</string>
+    <string name="title_auth">Authentication</string>
+    <string name="title_profil">MyProfil</string>
+</resources>
