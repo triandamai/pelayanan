@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="KEY_SHARED_DATA">com.x.pelayanan</string>
+    <string name="KEY_TOKEN">xtoken</string>
+    <string name="KEY_DATA_USER">xuserdata</string>
+</resources>
