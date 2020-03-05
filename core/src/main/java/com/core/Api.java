@@ -12,7 +12,7 @@ public interface Api {
     String accept_urlencoded = "Accept: application/x-www-form-urlencoded";
     String accept_json = "Accept: application/json";
     String api_key = "X-API-KEY: your api key";
-    
+
     @Headers({accept_urlencoded, api_key})
     @FormUrlEncoded
     @POST("auth/login")
