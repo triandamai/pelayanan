@@ -14,9 +14,9 @@ import butterknife.OnClick;
 
 public class Login extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.toolbar_log)
     Toolbar toolbar;
-    @BindView(R.id.appbar)
+    @BindView(R.id.appbar_log)
     AppBarLayout appbar;
 
     @Override
@@ -28,12 +28,12 @@ public class Login extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.toolbar, R.id.appbar})
+    @OnClick({R.id.toolbar_log, R.id.appbar_log})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.toolbar:
+            case R.id.toolbar_log:
                 break;
-            case R.id.appbar:
+            case R.id.appbar_log:
                 break;
         }
     }
