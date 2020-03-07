@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".Login">
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/appbar_log"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_log"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.appbar.AppBarLayout>
@@ -19,7 +19,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
         <RelativeLayout
             android:id="@+id/linear1"

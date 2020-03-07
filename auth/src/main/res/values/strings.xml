@@ -5,5 +5,16 @@
     <string name="login">Login</string>
     <string name="link_register">"No account yet? Create one"</string>
     <string name="link_forget">"Forget password?"</string>
+    <string name="register_email">"Email"</string>
+    <string name="register_nik">"NIK"</string>
+    <string name="register_repassword">"Re-password"</string>
+    <string name="check_label_yes">"Yes, I agree to the terms and conditions"</string>
+    <string name="check_label_no">"No"</string>
+    <string name="link_login">"I already have an account! back to login"</string>
+    <string name="register">"Register"</string>
+    <string name="notify">"Enter the same password!"</string>
+    <string name="notify_invalid">"passwords are not the same"</string>
+
+
 
 </resources>
