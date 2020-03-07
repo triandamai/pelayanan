@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_username">"Username"</string>
+    <string name="login_password">"Password"</string>
+    <string name="login">Login</string>
+    <string name="link_register">"No account yet? Create one"</string>
+    <string name="link_forget">"Forget password?"</string>
+
+</resources>
