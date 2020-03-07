@@ -8,11 +8,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_reg"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
+        android:layout_height="?actionBarSize"
+        app:elevation="4dp">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_reg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
     </com.google.android.material.appbar.AppBarLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,7 +49,7 @@
                     android:id="@id/input_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login_username"
+                    android:hint="@string/register_username"
                     android:inputType="textCapWords"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>

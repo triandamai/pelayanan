@@ -72,11 +72,11 @@
                 android:layout_marginBottom="8dp">
 
                 <EditText
-                    android:id="@+id/input_username"
+                    android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login_username"
-                    android:inputType="text" />
+                    android:hint="@string/register_email"
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
