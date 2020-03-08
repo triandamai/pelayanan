@@ -1,5 +1,6 @@
 package com.auth;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,16 +81,21 @@ public class Login extends AppCompatActivity {
 
         btnLogin.setEnabled(false);
 
+        final ProgressDialog progressDialog = new ProgressDialog(Login.this, ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating....");
+        progressDialog.show();
 
-        String inputUsername = eMail.getText().toString();
+        String inputEmail = eMail.getText().toString();
         String inputPassword = password.getText().toString();
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
                         onLoginSucces();
-
+                        progressDialog.dismiss();
                     }
                 },3000
         );
@@ -119,8 +125,8 @@ public class Login extends AppCompatActivity {
             eMail.setError(null);
         }
 
-        if (inputPassword.isEmpty() || password.length() < 8 || password.length() >= 8){
-            password.setError("Between 7 and 8 alphanumeric characters");
+        if (inputPassword.isEmpty() || password.length() < 8){
+            password.setError("Between 8 alphanumeric characters");
             valid = false;
         }else {
             password.setError(null);
