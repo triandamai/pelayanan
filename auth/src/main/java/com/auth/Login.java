@@ -31,9 +31,9 @@ public class Login extends AppCompatActivity {
     @BindView(R.id.btn_login)
     Button btnLogin;
     @BindView(R.id.link_register)
-    Button linkRegis;
+    TextView linkRegis;
     @BindView(R.id.link_forget)
-    Button linkForget;
+    TextView linkForget;
     @BindView(R.id.input_email)
     EditText eMail;
     @BindView(R.id.input_password)
