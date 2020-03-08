@@ -2,6 +2,7 @@ package com.core;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.models.User;
 
 public class ResponseLogin {
     @SerializedName("status")

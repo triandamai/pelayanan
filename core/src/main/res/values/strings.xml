@@ -3,4 +3,10 @@
     <string name="KEY_SHARED_DATA">com.x.pelayanan</string>
     <string name="KEY_TOKEN">xtoken</string>
     <string name="KEY_DATA_USER">xuserdata</string>
+
+    <string name="HTTP_OK">200</string>
+    <string name="HTTP_NOT_FOUND">404</string>
+    <string name="HTTP_UNAUTHORIZED">401</string>
+    <string name="HTTP_BAD_REQUEST">400</string>
+    <string name="METHOD_NOT_ALLOWED">405</string>
 </resources>
