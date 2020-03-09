@@ -48,85 +48,88 @@
                 android:src="@drawable/persib" />
         </RelativeLayout>
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear1"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center_horizontal"
-
-            android:background="@color/transparant12"
-            android:orientation="vertical"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp">
-
-
-
-            <!--email lable-->
-            <com.google.android.material.textfield.TextInputLayout
+            android:layout_alignParentBottom="true">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="8dp">
+                android:layout_gravity="center_horizontal"
 
-                <EditText
-                    android:id="@+id/input_email"
+                android:background="@color/transparant12"
+                android:orientation="vertical"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp">
+
+
+
+                <!--email lable-->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/register_email"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="8dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/register_email"
+                        android:inputType="textEmailAddress" />
 
-            <!--password lable-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/input_password"
+                <!--password lable-->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login_password"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/biru"
-                android:padding="10dp"
-                android:text="@string/login"
-                android:textSize="18sp"
-                android:gravity="center"/>
+                    <EditText
+                        android:id="@+id/input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/login_password"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/link_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:gravity="center"
-                android:text="@string/link_register"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="17sp" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/biru"
+                    android:padding="10dp"
+                    android:text="@string/login"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
 
-            <TextView
-                android:id="@+id/link_forget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:gravity="center"
-                android:text="@string/link_forget"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/link_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:gravity="center"
+                    android:text="@string/link_register"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/link_forget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:gravity="center"
+                    android:text="@string/link_forget"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="17sp" />
 
 
         </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

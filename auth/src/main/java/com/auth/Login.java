@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+
 
     }
 
@@ -109,7 +109,7 @@ public class Login extends AppCompatActivity {
 
     private void onLoginFailed() {
         Toast.makeText(this, "Login Failed.", Toast.LENGTH_SHORT).show();
-        btnLogin.setEnabled(false);
+        btnLogin.setEnabled(true);
     }
 
     private boolean validate() {

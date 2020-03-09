@@ -49,17 +49,6 @@ public class Daftar extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home :
-                onBackPressed();
-                return true;
-            default:
-                return onOptionsItemSelected(item);
-        }
-
-    }
 
     @OnClick({R.id.btn_register, R.id.back_to_login})
     public void bindViewOnClick(View v) {
@@ -69,6 +58,11 @@ public class Daftar extends AppCompatActivity {
                 break;
             case R.id.back_to_login:
                 linkLogin();
+                break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
                 break;
         }
     }
@@ -132,17 +126,35 @@ public class Daftar extends AppCompatActivity {
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             inputEmail.setError("Invalid email address!!");
             valid = false;
-        } else if (nik.isEmpty() || inputNik.length() <= 16) {
+        }else {
+            inputEmail.setError(null);
+        }
+
+        if (nik.isEmpty() || inputNik.length() <= 16) {
             inputNik.setError("NIK needs 16 numbers");
             valid = false;
-        }else if (password.isEmpty() || inputPassword.length() < 8){
+        }else {
+            inputNik.setError(null);
+        }
+
+        if (password.isEmpty() || inputPassword.length() < 8){
             inputPassword.setError("Between 8 alphanumeric characters");
             valid = false;
-        } else if (!password.equals(rePassword)) {
+        }else{
+            inputPassword.setError(null);
+        }
+
+        if (!password.equals(rePassword)) {
             inputRepassword.setError("Password not matching");
             valid = false;
-        }else if (username.isEmpty() || inputUsername.length() < 6){
+        }else{
+            inputRepassword.setError(null);
+        }
+
+        if (username.isEmpty() || inputUsername.length() < 6){
             inputUsername.setError("The username cannot be less than 6");
+        }else{
+            inputUsername.setError(null);
         }
         return valid;
     }
