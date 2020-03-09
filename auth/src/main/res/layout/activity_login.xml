@@ -6,15 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_log"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_log"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

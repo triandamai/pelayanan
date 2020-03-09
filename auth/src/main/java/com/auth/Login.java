@@ -26,9 +26,7 @@ public class Login extends AppCompatActivity {
 
 
 
-    @BindView(R.id.toolbar_log)
-    Toolbar toolbar;
-    @BindView(R.id.appbar_log)
+
     AppBarLayout appbar;
     @BindView(R.id.btn_login)
     Button btnLogin;
@@ -46,17 +44,13 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+
 
     }
 
-    @OnClick({R.id.toolbar_log, R.id.appbar_log, R.id.btn_login, R.id.link_forget, R.id.link_register})
+    @OnClick({R.id.btn_login, R.id.link_forget, R.id.link_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.toolbar_log:
-                break;
-            case R.id.appbar_log:
-                break;
             case R.id.btn_login:
                 login();
                 break;
