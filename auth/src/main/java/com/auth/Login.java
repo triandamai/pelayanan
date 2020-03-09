@@ -1,5 +1,6 @@
 package com.auth;
 
+import com.auth.R;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
 
     }
 
