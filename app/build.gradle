@@ -5,12 +5,12 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.pelayanandesa"
+        applicationId "com.tdn.laporan_desa"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -20,53 +20,57 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    dynamicFeatures = [":auth", ":profil"]
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+    dataBinding {
+        enabled = true
     }
+    dynamicFeatures = [":auth"]
+
+
 }
 
 dependencies {
+    api 'androidx.annotation:annotation:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'com.google.android.material:material:1.1.0'
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    testImplementation 'junit:junit:4.12'
+    api 'androidx.navigation:navigation-fragment:2.2.2'
+    api 'androidx.navigation:navigation-ui:2.2.2'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api project(':core')
+    // Add  SDK
+    api 'com.google.android.play:core:1.7.2'
 
-    /* material */
+    api "android.arch.lifecycle:extensions:1.1.1"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    api "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    api 'com.android.support:multidex:1.0.3'
+
     api 'com.google.android.material:material:1.1.0'
-    api 'com.google.android.play:core:1.6.5'
-    /* retrofit gson*/
-    api 'com.squareup.retrofit2:retrofit:2.7.1'
-    api 'com.google.code.gson:gson:2.8.5'
-    api 'com.squareup.retrofit2:retrofit:2.7.1'
-    api 'com.squareup.retrofit2:converter-gson:2.0.2'
-    /* butter knife */
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-    /* circle imageview(rounded) */
+
+
     api 'de.hdodenhof:circleimageview:3.1.0'
-    /* shimmer recyclerview */
-    api 'com.facebook.shimmer:shimmer:0.4.0'
+
+    api 'com.facebook.shimmer:shimmer:0.5.0'
     api 'com.todkars:shimmer-recyclerview:0.4.0'
     api 'androidx.recyclerview:recyclerview:1.1.0'
-
-    /* image loader library*/
-    api 'com.squareup.picasso:picasso:2.71828'
-    /* swiperefresh layout */
     api "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-    api 'com.robertlevonyan.view:MaterialExpansionPanel:2.0.7'
+    api 'com.squareup.picasso:picasso:2.71828'
 
-    api 'com.synnapps:carouselview:0.1.4'
+    api 'com.squareup.retrofit2:retrofit:2.7.1'
+    api 'com.squareup.retrofit2:converter-gson:2.7.1'
+    api 'com.squareup.retrofit2:converter-scalars:2.6.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    api 'androidx.cardview:cardview:1.0.0'
 
+    api project(':data')
+    api project(':domain')
 }
-apply plugin: 'com.jakewharton.butterknife'

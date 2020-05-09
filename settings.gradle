@@ -1,5 +1,5 @@
-rootProject.name='PelayananDesa'
+rootProject.name='Laporan_Desa'
 include ':app'
-include ':core'
+include ':data'
+include ':domain'
 include ':auth'
-include ':profil'
