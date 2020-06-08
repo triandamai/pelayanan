@@ -1,4 +1,95 @@
 package com.tdn.data.service;
 
+import com.tdn.domain.model.KomentarModel;
+import com.tdn.domain.model.UserModel;
+import com.tdn.domain.serialize.req.LaporanPostReq;
+import com.tdn.domain.serialize.req.LoginPostReq;
+import com.tdn.domain.serialize.res.ResponseGetKomentar;
+import com.tdn.domain.serialize.res.ResponseGetLaporan;
+import com.tdn.domain.serialize.res.ResponseGetUser;
+import com.tdn.domain.serialize.res.ResponsePostLogin;
+import com.tdn.domain.serialize.res.ResponsePostPutDel;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
+
 public interface ApiService {
+    //String BASE_URL = "http://192.168.1.19/laporan-karyawan-api/v1/";
+    String BASE_URL = "http://192.168.100.5/apipengaduan/api/v1/";
+    String USER_KEY = "";
+
+    String accept_urlencoded = "Content-Type: application/x-www-form-urlencoded";
+    String accept_json = "Accept: application/json;charset=utf-8";
+    String content_type = "Content-Type: application/json;charset=utf-8";
+    String api_key = "X-API-KEY: your api key";
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("user/login")
+    Call<ResponsePostLogin> login(@Body LoginPostReq loginPostReq);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("user/users")
+    Call<ResponseGetUser> getAllUser();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("user/users")
+    Call<ResponseGetUser> getUserById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("pengaduan/laporan")
+    Call<ResponseGetLaporan> getAllLaporan();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("pengaduan/laporan")
+    Call<ResponseGetLaporan> getLaporanById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("komentar/komentar")
+    Call<ResponseGetKomentar> getAllKomentar();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("komentar/komentar")
+    Call<ResponseGetKomentar> getKomentarById();
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("user/users")
+    Call<ResponsePostPutDel> postUser(@Body UserModel userModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @PUT("user/users")
+    Call<ResponsePostPutDel> putUser(@Body UserModel userModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @DELETE("user/users")
+    Call<ResponsePostPutDel> deleteUser(@Body UserModel userModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("pengaduan/laporan")
+    Call<ResponsePostPutDel> postLaporan(@Body LaporanPostReq laporanPostReq);
+
+    @Headers({accept_json, content_type, api_key})
+    @PUT("pengaduan/laporan")
+    Call<ResponsePostPutDel> putLaporan(@Body LaporanPostReq laporanPostReq);
+
+    @Headers({accept_json, content_type, api_key})
+    @DELETE("pengaduan/laporan")
+    Call<ResponsePostPutDel> deleteLaporan(@Body LaporanPostReq laporanPostReq);
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("komentar/komentar")
+    Call<ResponsePostPutDel> postKomentar(@Body KomentarModel komentarModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @PUT("komentar/komentar")
+    Call<ResponsePostPutDel> putKomentar(@Body KomentarModel komentarModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @DELETE("komentar/komentar")
+    Call<ResponsePostPutDel> deleteKomentar(@Body KomentarModel komentarModel);
 }

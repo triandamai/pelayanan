@@ -7,37 +7,34 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.tdn.laporan_desa.ui.home.HomeFragment"
+        android:name="com.tdn.laporan_desa.ui.home.HomePage"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/home_page_fragment">
 
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
     </fragment>
     <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.tdn.laporan_desa.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
+        android:id="@+id/nav_chat"
+        android:name="com.tdn.laporan_desa.ui.chat.Chat"
+        android:label="@string/menu_chat"
+        tools:layout="@layout/chat_fragment">
 
-        <argument
-            android:name="myArg"
-            app:argType="string" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.tdn.laporan_desa.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_tambah_laporan"
+        android:name="com.tdn.laporan_desa.ui.tambahlaporan.TambahLaporan"
+        android:label="@string/menu_tambah_laporan"
+        tools:layout="@layout/tambah_laporan_fragment" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.tdn.laporan_desa.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_komentar"
+        android:name="com.tdn.laporan_desa.ui.komentar.Komentar"
+        android:label="@string/menu_komentar"
+        tools:layout="@layout/komentar_fragment" />
+
+    <fragment
+        android:id="@+id/nav_datauser"
+        android:name="com.tdn.laporan_desa.ui.datauser.DataUser"
+        android:label="@string/menu_datauser"
+        tools:layout="@layout/data_user_fragment" />
 </navigation>

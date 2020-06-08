@@ -26,7 +26,7 @@ import com.tdn.auth.R;
 import com.tdn.auth.ui.login.LoginViewModel;
 import com.tdn.auth.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
