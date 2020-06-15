@@ -24,6 +24,9 @@ public class TambahLaporanViewModel extends ViewModel {
     private ApiService apiService;
     private ActionListener listener;
     public ObservableField<Boolean> isLoading = new ObservableField<>();
+    public ObservableField<String> foto = new ObservableField<>();
+    public ObservableField<String> isi = new ObservableField<>();
+    public ObservableField<String> judul = new ObservableField<>();
 
     public TambahLaporanViewModel(Context context, ActionListener actionListener) {
         this.context = context;
@@ -36,10 +39,10 @@ public class TambahLaporanViewModel extends ViewModel {
     public void simpan() {
         listener.onStart();
         LaporanPostReq laporanPostReq = new LaporanPostReq();
-        laporanPostReq.setBody("hai");
+        laporanPostReq.setBody(isi.get());
         laporanPostReq.setCreatedBy(MyUser.getInstance(context).getUser().getIdUser());
-        laporanPostReq.setJudul("Ini test ");
-        laporanPostReq.setMediaLaporan("https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/2020/04/09/663219154.png");
+        laporanPostReq.setJudul(judul.get());
+        laporanPostReq.setMediaLaporan(foto.get());
         laporanPostReq.setStatusLaporan("ada");
 
         apiService.postLaporan(laporanPostReq).enqueue(new Callback<ResponsePostPutDel>() {
