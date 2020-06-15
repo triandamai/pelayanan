@@ -1,9 +1,12 @@
 package com.tdn.laporan_desa.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -15,7 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.tdn.data.persistensi.MyUser;
 import com.tdn.laporan_desa.R;
+import com.tdn.laporan_desa.auth.Login;
 import com.tdn.laporan_desa.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +65,20 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_keluar:
+                MyUser.getInstance(getApplicationContext()).signOut();
+                startActivity(new Intent(MainActivity.this, Login.class));
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override

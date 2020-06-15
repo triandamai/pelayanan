@@ -92,4 +92,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @DELETE("komentar/komentar")
     Call<ResponsePostPutDel> deleteKomentar(@Body KomentarModel komentarModel);
+
+    class Factory {
+        public static ApiService create() {
+            return RepoFactory.createService(ApiService.class);
+        }
+    }
 }

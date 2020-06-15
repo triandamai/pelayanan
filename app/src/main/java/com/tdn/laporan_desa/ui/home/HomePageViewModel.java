@@ -26,7 +26,7 @@ public class HomePageViewModel extends ViewModel {
 
     public HomePageViewModel(Context context, ActionListener actionListener) {
         this.context = context;
-        this.apiService = Repository.getService(context);
+        this.apiService = ApiService.Factory.create();
         this.listener = actionListener;
         this.realm = Realm.getDefaultInstance();
         fetchfromApi();

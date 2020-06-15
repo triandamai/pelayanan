@@ -8,7 +8,6 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.tdn.data.persistensi.MyUser;
-import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.serialize.req.LoginPostReq;
 import com.tdn.domain.serialize.res.ResponsePostLogin;
@@ -31,7 +30,7 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel(Context context, ActionListener actionListener) {
         this.context = context;
-        this.apiService = Repository.getService(context);
+        this.apiService = ApiService.Factory.create();
         this.isLoading.set(false);
         this.listener = actionListener;
     }

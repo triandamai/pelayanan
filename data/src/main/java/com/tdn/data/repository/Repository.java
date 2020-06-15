@@ -31,7 +31,7 @@ public class Repository {
 
     private Repository(Context ctx) {
         realm = Realm.getDefaultInstance();
-        service = createService(ApiService.class);
+        service = ApiService.Factory.create();
         context = ctx;
     }
 
