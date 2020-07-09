@@ -47,15 +47,23 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        fab.setOnClickListener(v -> {
-            navController.navigate(R.id.nav_tambah_laporan);
-        });
+
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             int id = controller.getCurrentDestination().getId();
             if (id == R.id.nav_tambah_laporan) {
                 fab.setVisibility(View.GONE);
-            } else {
+            } else if (id == R.id.nav_tambah_user) {
+                fab.setVisibility(View.GONE);
+            } else if (id == R.id.nav_home) {
                 fab.setVisibility(View.VISIBLE);
+                fab.setOnClickListener(v -> {
+                    navController.navigate(R.id.nav_tambah_laporan);
+                });
+            } else if (id == R.id.nav_datauser) {
+                fab.setVisibility(View.VISIBLE);
+                fab.setOnClickListener(v -> {
+                    navController.navigate(R.id.nav_tambah_user);
+                });
             }
         });
     }

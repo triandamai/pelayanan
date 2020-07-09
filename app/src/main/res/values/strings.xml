@@ -25,4 +25,5 @@
     <string name="menu_komentar">Komentar</string>
     <string name="menu_datauser">Data User</string>
     <string name="logout">Keluar</string>
+    <string name="menu_tambah_user">Tambah User</string>
 </resources>

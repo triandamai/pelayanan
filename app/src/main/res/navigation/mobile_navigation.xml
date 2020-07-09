@@ -25,6 +25,11 @@
         android:name="com.tdn.laporan_desa.ui.tambahlaporan.TambahLaporan"
         android:label="@string/menu_tambah_laporan"
         tools:layout="@layout/tambah_laporan_fragment" />
+    <fragment
+        android:id="@+id/nav_tambah_user"
+        android:name="com.tdn.laporan_desa.ui.tambahlaporan.TambahLaporan"
+        android:label="@string/menu_tambah_user"
+        tools:layout="@layout/tambah_user_fragment" />
 
     <fragment
         android:id="@+id/nav_komentar"
