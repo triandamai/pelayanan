@@ -4,6 +4,7 @@ import com.tdn.domain.model.KomentarModel;
 import com.tdn.domain.model.UserModel;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.domain.serialize.req.LoginPostReq;
+import com.tdn.domain.serialize.req.UserPostReq;
 import com.tdn.domain.serialize.res.ResponseGetKomentar;
 import com.tdn.domain.serialize.res.ResponseGetLaporan;
 import com.tdn.domain.serialize.res.ResponseGetUser;
@@ -21,7 +22,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     //String BASE_URL = "http://192.168.1.19/laporan-karyawan-api/v1/";
-    String BASE_URL = "http://192.168.100.5/apipengaduan/api/v1/";
+    String BASE_URL = "http://192.168.8.101/apipengaduan/api/v1/";
+    // String BASE_URL = "http://192.168.100.5/apipengaduan/api/v1/";
     String USER_KEY = "";
 
     String accept_urlencoded = "Content-Type: application/x-www-form-urlencoded";
@@ -59,7 +61,7 @@ public interface ApiService {
 
     @Headers({accept_json, content_type, api_key})
     @POST("user/users")
-    Call<ResponsePostPutDel> postUser(@Body UserModel userModel);
+    Call<ResponsePostPutDel> postUser(@Body UserPostReq userModel);
 
     @Headers({accept_json, content_type, api_key})
     @PUT("user/users")

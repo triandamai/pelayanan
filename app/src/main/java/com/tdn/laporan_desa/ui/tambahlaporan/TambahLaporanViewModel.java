@@ -27,6 +27,7 @@ public class TambahLaporanViewModel extends ViewModel {
     public ObservableField<String> foto = new ObservableField<>();
     public ObservableField<String> isi = new ObservableField<>();
     public ObservableField<String> judul = new ObservableField<>();
+    public ObservableField<String> ket = new ObservableField<>();
 
     public TambahLaporanViewModel(Context context, ActionListener actionListener) {
         this.context = context;
@@ -38,31 +39,37 @@ public class TambahLaporanViewModel extends ViewModel {
 
     public void simpan() {
         listener.onStart();
-        LaporanPostReq laporanPostReq = new LaporanPostReq();
-        laporanPostReq.setBody(isi.get());
-        laporanPostReq.setCreatedBy(MyUser.getInstance(context).getUser().getIdUser());
-        laporanPostReq.setJudul(judul.get());
-        laporanPostReq.setMediaLaporan(foto.get());
-        laporanPostReq.setStatusLaporan("ada");
+        if (isi.get().isEmpty() || judul.get().isEmpty() || foto.get().isEmpty()) {
+            LaporanPostReq laporanPostReq = new LaporanPostReq();
+            laporanPostReq.setBody(isi.get());
+            laporanPostReq.setCreatedBy(MyUser.getInstance(context).getUser().getIdUser());
+            laporanPostReq.setJudul(judul.get());
+            laporanPostReq.setMediaLaporan(foto.get());
+            laporanPostReq.setStatusLaporan("ada");
 
-        apiService.postLaporan(laporanPostReq).enqueue(new Callback<ResponsePostPutDel>() {
-            @Override
-            public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
-                if (cek(response.code())) {
-                    if (cek(response.body().getResponseCode())) {
-                        listener.onSuccess(response.body().getResponseMessage());
+            apiService.postLaporan(laporanPostReq).enqueue(new Callback<ResponsePostPutDel>() {
+                @Override
+                public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
+                    if (cek(response.code())) {
+                        if (cek(response.body().getResponseCode())) {
+                            listener.onSuccess(response.body().getResponseMessage());
+                        } else {
+                            listener.onError(response.body().getResponseMessage());
+                        }
                     } else {
-                        listener.onError(response.body().getResponseMessage());
+                        listener.onError(response.message().toString());
                     }
-                } else {
-                    listener.onError(response.message().toString());
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
-                listener.onError(t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
+                    listener.onError(t.getMessage());
+                }
+            });
+        } else {
+            listener.onError("Isi semua data");
+        }
+
+
     }
 }
