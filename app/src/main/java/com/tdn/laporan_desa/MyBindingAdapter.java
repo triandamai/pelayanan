@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.squareup.picasso.Picasso;
+import com.tdn.data.service.ApiService;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,7 +50,7 @@ public class MyBindingAdapter {
         if (TextUtils.isEmpty(url)) {
             v.setVisibility(View.GONE);
         } else {
-            Picasso.get().load(url)
+            Picasso.get().load(ApiService.BASE_URL_IMAGE + url)
                     .placeholder(R.drawable.logo)
                     .into(v);
         }
@@ -60,7 +61,7 @@ public class MyBindingAdapter {
         if (TextUtils.isEmpty(url)) {
             v.setVisibility(View.GONE);
         } else {
-            Picasso.get().load(url)
+            Picasso.get().load(ApiService.BASE_URL_IMAGE + url)
                     .placeholder(R.drawable.logo)
                     .into(v);
         }

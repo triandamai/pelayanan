@@ -2,6 +2,7 @@ package com.tdn.data.service;
 
 import com.tdn.domain.model.KomentarModel;
 import com.tdn.domain.model.UserModel;
+import com.tdn.domain.serialize.req.KomentarPostReq;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.domain.serialize.req.LoginPostReq;
 import com.tdn.domain.serialize.req.UserPostReq;
@@ -22,7 +23,10 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     //String BASE_URL = "http://192.168.1.19/laporan-karyawan-api/v1/";
-    String BASE_URL = "http://192.168.8.101/apipengaduan/api/v1/";
+//    String BASE = "http://192.168.100.5/apipengaduan/";
+    String BASE = "https://apipengaduan.000webhostapp.com/";
+    String BASE_URL = BASE + "api/v1/";
+    String BASE_URL_IMAGE = BASE + "assets/pengaduan/";
     // String BASE_URL = "http://192.168.100.5/apipengaduan/api/v1/";
     String USER_KEY = "";
 
@@ -50,6 +54,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @GET("pengaduan/laporan")
     Call<ResponseGetLaporan> getLaporanById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("komentar/komentar")
+    Call<ResponseGetKomentar> getAllKomentar(@Query("id") String id);
 
     @Headers({accept_json, content_type, api_key})
     @GET("komentar/komentar")
@@ -85,7 +93,7 @@ public interface ApiService {
 
     @Headers({accept_json, content_type, api_key})
     @POST("komentar/komentar")
-    Call<ResponsePostPutDel> postKomentar(@Body KomentarModel komentarModel);
+    Call<ResponsePostPutDel> postKomentar(@Body KomentarPostReq komentarModel);
 
     @Headers({accept_json, content_type, api_key})
     @PUT("komentar/komentar")

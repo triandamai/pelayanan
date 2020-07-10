@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +53,14 @@ public class TambahUser extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.tambah_user_fragment, container, false);
+        binding.setIsLoading(false);
+
         mViewModel = new ViewModelProvider(this, new VmFactory(getContext(), actionListener)).get(TambahUserViewModel.class);
+        binding.setVm(mViewModel);
         datePickerMax = new DatePickerMax();
         datePickerMax.setDateListener((tahun, bulan, hari) -> {
-            binding.etTanggallahir.setText(hari + "-" + bulan + "-" + tahun);
-            mViewModel.tanggallahir.set(hari + "-" + bulan + "-" + tahun);
+            binding.etTanggallahir.setText(tahun + "-" + bulan + "-" + hari);
+            mViewModel.tanggallahir.setValue(tahun + "-" + bulan + "-" + hari);
         });
         binding.etTanggallahir.setOnClickListener(v -> {
             datePickerMax.show(getParentFragmentManager(), "Pick");
@@ -71,15 +76,15 @@ public class TambahUser extends BaseFragment {
                 switch (which) {
                     case 0:
                         binding.etLevel.setText("Kepala Desa");
-                        mViewModel.level.set("kades");
+                        mViewModel.level.setValue("kades");
                         break;
                     case 1:
                         binding.etLevel.setText("Perangkat Desa");
-                        mViewModel.level.set("perangkat");
+                        mViewModel.level.setValue("perangkat");
                         break;
                     case 2:
                         binding.etLevel.setText("Warga");
-                        mViewModel.level.set("warga");
+                        mViewModel.level.setValue("warga");
                         break;
                     default:
                         binding.etLevel.setText("Warga");
@@ -99,8 +104,8 @@ public class TambahUser extends BaseFragment {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
                             if (report.areAllPermissionsGranted()) {
-                                //showImagePickerOptions();
-                                launchCameraIntent();
+                                showImagePickerOptions();
+
                             }
 
                             if (report.isAnyPermissionPermanentlyDenied()) {
@@ -114,25 +119,121 @@ public class TambahUser extends BaseFragment {
                         }
                     }).check();
         });
+        binding.etNama.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.nama.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etNik.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.nik.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.username.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.password.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etTempatlahir.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.tempatlahir.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etAlamat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.alamat.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return binding.getRoot();
     }
 
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void onStart() {
-            mViewModel.isLoading.set(true);
+            binding.setIsLoading(true);
         }
 
         @Override
         public void onSuccess(String message) {
-            mViewModel.isLoading.set(false);
+            binding.setIsLoading(false);
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
             Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_datauser);
         }
 
         @Override
         public void onError(String message) {
-            mViewModel.isLoading.set(false);
+            binding.setIsLoading(false);
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
         }
     };
@@ -148,12 +249,12 @@ public class TambahUser extends BaseFragment {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                     binding.ivPickImage.setImageBitmap(bitmap);
                     //   Picasso.get().load(uri.toString()).into(binding.ivPickImage);
-                    mViewModel.media.set(encodeImage(uri.getPath()));
+                    mViewModel.media.setValue(encodeImage(uri.getPath()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-    
+
 }

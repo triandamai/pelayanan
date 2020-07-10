@@ -39,7 +39,7 @@ public class DataUserViewModel extends ViewModel {
 
     public void fetchfromApi() {
 
-        Repository.getInstance(context).getAllLaporan();
+        Repository.getInstance(context).getAllUser();
 
     }
 

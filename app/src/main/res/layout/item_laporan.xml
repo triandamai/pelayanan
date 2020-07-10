@@ -55,12 +55,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="16dp"
                         android:text="@{bind.nama}"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_16"
+                        android:layout_marginLeft="@dimen/padding_10"
                         android:text="@{`@`+bind.username}" />
                 </LinearLayout>
 
@@ -68,11 +71,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/padding_10"
+                    android:textSize="14dp"
                     android:text="@{bind.judul}" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:maxLines="10"
                     android:text="@{bind.body}" />
 
                 <androidx.cardview.widget.CardView
@@ -97,30 +103,38 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="@{bind.statusLaporan}" />
 
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/rl_komentar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="@dimen/padding_10"
+                    android:onClick="@{()->click.onComment(pos)}"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#00FFFFFF"
-                        android:src="@drawable/ic_chat"
-                        android:padding="@dimen/padding_10"
-                        android:onClick="@{()->click.onComment(pos)}"
-                        android:tooltipText="Komentar" />
+                        android:gravity="center"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:text="Lihat semua komentar.." />
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
-                        android:src="@drawable/ic_add"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_baseline_send_24"
                         android:padding="@dimen/padding_10"
-                        android:tooltipText="Share" />
-                </LinearLayout>
+
+                        android:tooltipText="Komentar" />
+
+
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 

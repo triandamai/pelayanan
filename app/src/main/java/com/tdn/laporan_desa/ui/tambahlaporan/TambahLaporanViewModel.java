@@ -1,16 +1,18 @@
 package com.tdn.laporan_desa.ui.tambahlaporan;
 
 import android.content.Context;
+import android.util.Log;
 
-import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.tdn.data.persistensi.MyUser;
-import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.domain.serialize.res.ResponsePostPutDel;
 import com.tdn.laporan_desa.callback.ActionListener;
+
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,33 +25,38 @@ public class TambahLaporanViewModel extends ViewModel {
     private Context context;
     private ApiService apiService;
     private ActionListener listener;
-    public ObservableField<Boolean> isLoading = new ObservableField<>();
-    public ObservableField<String> foto = new ObservableField<>();
-    public ObservableField<String> isi = new ObservableField<>();
-    public ObservableField<String> judul = new ObservableField<>();
-    public ObservableField<String> ket = new ObservableField<>();
+    public MutableLiveData<String> foto = new MutableLiveData<>();
+    public MutableLiveData<String> isi = new MutableLiveData<>();
+    public MutableLiveData<String> judul = new MutableLiveData<>();
 
     public TambahLaporanViewModel(Context context, ActionListener actionListener) {
         this.context = context;
-        this.apiService = Repository.getService(context);
-        this.isLoading.set(false);
+        this.apiService = ApiService.Factory.create();
         this.listener = actionListener;
+
+        isi.setValue("");
+        judul.setValue("");
+        foto.setValue("");
 
     }
 
     public void simpan() {
         listener.onStart();
-        if (isi.get().isEmpty() || judul.get().isEmpty() || foto.get().isEmpty()) {
+        if (!isi.getValue().isEmpty() || !judul.getValue().isEmpty() || !foto.getValue().isEmpty()) {
             LaporanPostReq laporanPostReq = new LaporanPostReq();
-            laporanPostReq.setBody(isi.get());
+            laporanPostReq.setIdLaporan("fgf");
+            laporanPostReq.setBody(isi.getValue());
             laporanPostReq.setCreatedBy(MyUser.getInstance(context).getUser().getIdUser());
-            laporanPostReq.setJudul(judul.get());
-            laporanPostReq.setMediaLaporan(foto.get());
+            laporanPostReq.setJudul(judul.getValue());
+            laporanPostReq.setMediaLaporan(foto.getValue());
             laporanPostReq.setStatusLaporan("ada");
-
+            laporanPostReq.setCreatedAt(String.valueOf(new Date().getTime()));
+            laporanPostReq.setUpdatedAt(String.valueOf(new Date().getTime()));
+            Log.e("Send Laporan", laporanPostReq.toString());
             apiService.postLaporan(laporanPostReq).enqueue(new Callback<ResponsePostPutDel>() {
                 @Override
                 public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
+                    Log.e(TAG, response.toString());
                     if (cek(response.code())) {
                         if (cek(response.body().getResponseCode())) {
                             listener.onSuccess(response.body().getResponseMessage());
@@ -64,6 +71,7 @@ public class TambahLaporanViewModel extends ViewModel {
                 @Override
                 public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
                     listener.onError(t.getMessage());
+                    Log.e(TAG, t.toString());
                 }
             });
         } else {

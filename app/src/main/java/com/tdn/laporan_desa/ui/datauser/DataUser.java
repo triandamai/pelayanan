@@ -35,13 +35,15 @@ public class DataUser extends Fragment {
         binding.rv.setAdapter(adapterDataUser);
         binding.setVm(mViewModel);
         binding.setRefresh(refreshListener);
+
+
         return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity(), new VmFactory(getContext())).get(DataUserViewModel.class);
+        mViewModel = new ViewModelProvider(this, new VmFactory(getContext())).get(DataUserViewModel.class);
 
         // TODO: Use the ViewModel
     }

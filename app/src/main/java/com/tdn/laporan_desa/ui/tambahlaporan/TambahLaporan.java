@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,7 @@ public class TambahLaporan extends BaseFragment {
         mViewModel = new ViewModelProvider(requireActivity(), new VmFactory(getContext(), actionListener)).get(TambahLaporanViewModel.class);
 
         binding.setVm(mViewModel);
+        binding.setIsLoading(false);
         binding.ivPickImage.setOnClickListener(v -> {
             Dexter.withActivity(getActivity())
                     .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -58,8 +61,8 @@ public class TambahLaporan extends BaseFragment {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
                             if (report.areAllPermissionsGranted()) {
-                                //showImagePickerOptions();
-                                launchCameraIntent();
+                                showImagePickerOptions();
+
                             }
 
                             if (report.isAnyPermissionPermanentlyDenied()) {
@@ -74,25 +77,58 @@ public class TambahLaporan extends BaseFragment {
                     }).check();
 
         });
+        binding.judul.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.judul.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.isi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.isi.setValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         return binding.getRoot();
     }
 
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void onStart() {
-            mViewModel.isLoading.set(true);
+            binding.setIsLoading(true);
         }
 
         @Override
         public void onSuccess(String message) {
-            mViewModel.isLoading.set(false);
+            binding.setIsLoading(false);
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
             Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_home);
         }
 
         @Override
         public void onError(String message) {
-            mViewModel.isLoading.set(false);
+            binding.setIsLoading(false);
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
         }
     };
@@ -108,7 +144,7 @@ public class TambahLaporan extends BaseFragment {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                     binding.ivPickImage.setImageBitmap(bitmap);
                     //   Picasso.get().load(uri.toString()).into(binding.ivPickImage);
-                    mViewModel.foto.set(encodeImage(uri.getPath()));
+                    mViewModel.foto.setValue(encodeImage(uri.getPath()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

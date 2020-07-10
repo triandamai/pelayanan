@@ -20,6 +20,7 @@ import com.tdn.laporan_desa.ui.tambahuser.TambahUserViewModel;
 
 public class VmFactory implements ViewModelProvider.Factory {
     private Context context;
+    private String id = "";
     private ActionListener actionListener;
     private LaporanPostReq laporanPostReq;
     private UserModel userModel;
@@ -44,6 +45,12 @@ public class VmFactory implements ViewModelProvider.Factory {
         this.context = context;
         this.actionListener = actionListener;
         this.userModel = userModel;
+    }
+
+    public VmFactory(@NonNull Context context, ActionListener actionListener, String id) {
+        this.context = context;
+        this.actionListener = actionListener;
+        this.id = id;
     }
 
     public VmFactory(@NonNull Context context, ActionListener actionListener, KomentarModel komentarModel) {
@@ -73,7 +80,7 @@ public class VmFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(ChatViewModel.class)) {
             return (T) new ChatViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(KomentarViewModel.class)) {
-            return (T) new KomentarViewModel(context, actionListener);
+            return (T) new KomentarViewModel(context, actionListener, id);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }

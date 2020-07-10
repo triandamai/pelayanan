@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_tambah_laporan"
+            android:icon="@drawable/ic_baseline_post_add"
+            android:title="@string/menu_tambah_laporan" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_baseline_chat"
+            android:title="@string/menu_chat" />
+
+    </group>
+</menu>

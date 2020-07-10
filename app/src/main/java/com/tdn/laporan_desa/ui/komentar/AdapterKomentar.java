@@ -1,4 +1,4 @@
-package com.tdn.laporan_desa.ui.home;
+package com.tdn.laporan_desa.ui.komentar;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,28 +8,28 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tdn.domain.realmobject.LaporanObject;
+import com.tdn.domain.realmobject.KomentarObject;
 import com.tdn.laporan_desa.R;
-import com.tdn.laporan_desa.callback.AdapterLaporanClicked;
-import com.tdn.laporan_desa.databinding.ItemLaporanBinding;
+import com.tdn.laporan_desa.callback.AdapterClicked;
+import com.tdn.laporan_desa.databinding.ItemKomentarBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.MyViewHolder> {
-    private List<LaporanObject> laporanObjects = new ArrayList<>();
-    private AdapterLaporanClicked listener;
+public class AdapterKomentar extends RecyclerView.Adapter<AdapterKomentar.MyViewHolder> {
+    private List<KomentarObject> laporanObjects = new ArrayList<>();
+    private AdapterClicked listener;
 
 
-    public AdapterLaporan(AdapterLaporanClicked listener) {
+    public AdapterKomentar(AdapterClicked listener) {
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemLaporanBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_laporan, parent, false);
+        ItemKomentarBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_komentar, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -40,14 +40,14 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.MyViewHo
         holder.binding.setPos(position);
     }
 
-    public void setData(List<LaporanObject> l) {
+    public void setData(List<KomentarObject> l) {
         if (this.laporanObjects == null) {
             this.laporanObjects = l;
         } else {
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
                 public int getOldListSize() {
-                    return AdapterLaporan.this.laporanObjects.size();
+                    return AdapterKomentar.this.laporanObjects.size();
                 }
 
                 @Override
@@ -57,13 +57,13 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.MyViewHo
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return AdapterLaporan.this.laporanObjects.get(oldItemPosition).getIdLaporan() == l.get(newItemPosition).getIdLaporan();
+                    return AdapterKomentar.this.laporanObjects.get(oldItemPosition).getIdLaporan() == l.get(newItemPosition).getIdLaporan();
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    LaporanObject lama = l.get(oldItemPosition);
-                    LaporanObject baru = l.get(newItemPosition);
+                    KomentarObject lama = l.get(oldItemPosition);
+                    KomentarObject baru = l.get(newItemPosition);
                     return lama == baru && Objects.equals(lama, baru);
                 }
             });
@@ -79,14 +79,10 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.MyViewHo
         return laporanObjects == null ? 0 : laporanObjects.size();
     }
 
-    public LaporanObject getData(int pos) {
-        return laporanObjects.get(pos);
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ItemLaporanBinding binding;
+        private ItemKomentarBinding binding;
 
-        public MyViewHolder(@NonNull ItemLaporanBinding itemView) {
+        public MyViewHolder(@NonNull ItemKomentarBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }

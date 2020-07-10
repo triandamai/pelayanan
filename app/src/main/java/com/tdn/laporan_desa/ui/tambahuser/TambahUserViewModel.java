@@ -1,11 +1,11 @@
 package com.tdn.laporan_desa.ui.tambahuser;
 
 import android.content.Context;
+import android.util.Log;
 
-import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.serialize.req.UserPostReq;
 import com.tdn.domain.serialize.res.ResponsePostPutDel;
@@ -24,48 +24,59 @@ public class TambahUserViewModel extends ViewModel {
     private Context context;
     private ApiService apiService;
     private ActionListener listener;
-    public ObservableField<Boolean> isLoading = new ObservableField<>();
-    public ObservableField<String> nama = new ObservableField<>();
-    public ObservableField<String> alamat = new ObservableField<>();
-    public ObservableField<String> tempatlahir = new ObservableField<>();
-    public ObservableField<String> tanggallahir = new ObservableField<>();
-    public ObservableField<String> username = new ObservableField<>();
-    public ObservableField<String> password = new ObservableField<>();
-    public ObservableField<String> nik = new ObservableField<>();
-    public ObservableField<String> level = new ObservableField<>();
-    public ObservableField<String> status = new ObservableField<>();
-    public ObservableField<String> media = new ObservableField<>();
-    public ObservableField<String> created_at = new ObservableField<>();
-    public ObservableField<String> updated_at = new ObservableField<>();
+    public MutableLiveData<String> nama = new MutableLiveData<>();
+    public MutableLiveData<String> alamat = new MutableLiveData<>();
+    public MutableLiveData<String> tempatlahir = new MutableLiveData<>();
+    public MutableLiveData<String> tanggallahir = new MutableLiveData<>();
+    public MutableLiveData<String> username = new MutableLiveData<>();
+    public MutableLiveData<String> password = new MutableLiveData<>();
+    public MutableLiveData<String> nik = new MutableLiveData<>();
+    public MutableLiveData<String> level = new MutableLiveData<>();
+    public MutableLiveData<String> media = new MutableLiveData<>();
 
     public TambahUserViewModel(Context context, ActionListener actionListener) {
         this.context = context;
-        this.apiService = Repository.getService(context);
-        this.isLoading.set(false);
+        this.apiService = ApiService.Factory.create();
+
         this.listener = actionListener;
+
+        nama.setValue("");
+        alamat.setValue("");
+        tempatlahir.setValue("");
+        tanggallahir.setValue("");
+        username.setValue("");
+        password.setValue("");
+        nik.setValue("");
+        level.setValue("");
+        media.setValue("");
     }
 
     public void simpan() {
         listener.onStart();
-        if (nama.get().isEmpty()) {
+
+        if (!nama.getValue().isEmpty()) {
             UserPostReq userPostReq = new UserPostReq();
-            userPostReq.setNama(nama.get());
-            userPostReq.setAlamat(alamat.get());
-            userPostReq.setLevel(level.get());
-            userPostReq.setNik(nik.get());
-            userPostReq.setTanggalLahir(tanggallahir.get());
-            userPostReq.setPassword(nik.get());
-            userPostReq.setUsername(username.get());
-            userPostReq.setTempatLahir(tempatlahir.get());
-            userPostReq.setStatus("ada");
+            userPostReq.setIdUser("tes");
+            userPostReq.setNama(nama.getValue());
+            userPostReq.setAlamat(alamat.getValue());
+            userPostReq.setLevel(level.getValue());
+            userPostReq.setNik(nik.getValue());
+            userPostReq.setTanggalLahir(tanggallahir.getValue());
+            userPostReq.setPassword(nik.getValue());
+            userPostReq.setUsername(username.getValue());
+            userPostReq.setTempatLahir(tempatlahir.getValue());
+            userPostReq.setStatusUser("ada");
+            userPostReq.setMediaUser(media.getValue());
             userPostReq.setCreatedAt(String.valueOf(new Date().getTime()));
             userPostReq.setUpdatedAt(String.valueOf(new Date().getTime()));
-
+            Log.e("Send User", userPostReq.toString());
             apiService.postUser(userPostReq).enqueue(new Callback<ResponsePostPutDel>() {
                 @Override
                 public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
+
                     if (cek(response.code())) {
                         if (cek(response.body().getResponseCode())) {
+
                             listener.onSuccess(response.body().getResponseMessage());
                         } else {
                             listener.onError(response.body().getResponseMessage());
@@ -77,10 +88,12 @@ public class TambahUserViewModel extends ViewModel {
 
                 @Override
                 public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
+
                     listener.onError(t.getMessage());
                 }
             });
         } else {
+
             listener.onError("Isi semua data");
         }
 

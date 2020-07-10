@@ -22,6 +22,12 @@ public class LaporanPostReq {
     @SerializedName("status_laporan")
     @Expose
     private String statusLaporan;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
 
     public String getIdLaporan() {
         return idLaporan;
@@ -71,5 +77,33 @@ public class LaporanPostReq {
         this.statusLaporan = statusLaporan;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "LaporanPostReq{" +
+                "idLaporan='" + idLaporan + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", judul='" + judul + '\'' +
+                ", body='" + body + '\'' +
+                ", mediaLaporan='" + mediaLaporan + '\'' +
+                ", statusLaporan='" + statusLaporan + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                '}';
+    }
 }

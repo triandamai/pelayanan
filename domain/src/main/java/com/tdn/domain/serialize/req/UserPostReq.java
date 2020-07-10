@@ -31,12 +31,12 @@ public class UserPostReq {
     @SerializedName("level")
     @Expose
     private String level;
-    @SerializedName("status")
+    @SerializedName("media_user")
     @Expose
-    private String status;
-    @SerializedName("media")
+    private String mediaUser;
+    @SerializedName("status_user")
     @Expose
-    private String media;
+    private String statusUser;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -116,20 +116,20 @@ public class UserPostReq {
         this.level = level;
     }
 
-    public String getStatus() {
-        return status;
+    public String getMediaUser() {
+        return mediaUser;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setMediaUser(String mediaUser) {
+        this.mediaUser = mediaUser;
     }
 
-    public String getMedia() {
-        return media;
+    public String getStatusUser() {
+        return statusUser;
     }
 
-    public void setMedia(String media) {
-        this.media = media;
+    public void setStatusUser(String statusUser) {
+        this.statusUser = statusUser;
     }
 
     public String getCreatedAt() {
@@ -148,10 +148,9 @@ public class UserPostReq {
         this.updatedAt = updatedAt;
     }
 
-
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "UserPostReq{" +
                 "idUser='" + idUser + '\'' +
                 ", nama='" + nama + '\'' +
                 ", alamat='" + alamat + '\'' +
@@ -161,12 +160,10 @@ public class UserPostReq {
                 ", password='" + password + '\'' +
                 ", nik='" + nik + '\'' +
                 ", level='" + level + '\'' +
-                ", status='" + status + '\'' +
-                ", media='" + media + '\'' +
+                ", mediaUser='" + mediaUser + '\'' +
+                ", statusUser='" + statusUser + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
-
-
 }

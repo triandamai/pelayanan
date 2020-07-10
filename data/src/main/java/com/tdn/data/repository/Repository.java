@@ -20,7 +20,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.tdn.data.service.ApiHandler.cek;
-import static com.tdn.data.service.RepoFactory.createService;
 
 public class Repository {
     public static final String TAG = "LAPORAN :: ";
@@ -42,9 +41,9 @@ public class Repository {
         return repository;
     }
 
-    public static ApiService getService(Context context) {
+    public static ApiService getService() {
         if (service == null) {
-            service = createService(ApiService.class);
+            service = ApiService.Factory.create();
         }
         return service;
     }
@@ -117,18 +116,25 @@ public class Repository {
 
                 if (cek(response.code())) {
                     Log.e(TAG, response.body().toString());
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
                         realm.beginTransaction();
                         realm.delete(LaporanObject.class);
                         realm.commitTransaction();
                         for (LaporanModel data : response.body().getData()) {
-                            LaporanObject o = (LaporanObject) data.ToObject();
-                            Log.e("tes", o.toString());
-                            realm.executeTransaction(realm -> {
-                                realm.copyToRealmOrUpdate(o);
-                            });
+                            if (data.getStatusLaporan().equalsIgnoreCase("ada")) {
+                                LaporanObject o = (LaporanObject) data.ToObject();
+                                Log.e("tes", o.toString());
+                                realm.executeTransaction(realm -> {
+                                    realm.copyToRealmOrUpdate(o);
+                                });
+                            }
                         }
 
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(LaporanObject.class);
+                        realm.commitTransaction();
                     }
                 }
             }
@@ -178,7 +184,7 @@ public class Repository {
 
                 if (cek(response.code())) {
                     Log.e(TAG, response.body().toString());
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
                         realm.beginTransaction();
                         realm.delete(KomentarObject.class);
                         realm.commitTransaction();
@@ -189,6 +195,44 @@ public class Repository {
                             });
                         }
 
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(KomentarObject.class);
+                        realm.commitTransaction();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetKomentar> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
+    }
+
+    public void getAllKomentar(String id) {
+        service.getAllKomentar().enqueue(new Callback<ResponseGetKomentar>() {
+            @Override
+            public void onResponse(Call<ResponseGetKomentar> call, Response<ResponseGetKomentar> response) {
+                Log.e(TAG, response.toString());
+
+                if (cek(response.code())) {
+                    Log.e(TAG, response.body().toString());
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
+                        realm.beginTransaction();
+                        realm.delete(KomentarObject.class);
+                        realm.commitTransaction();
+                        for (KomentarModel data : response.body().getData()) {
+                            KomentarObject o = (KomentarObject) data.ToObject();
+                            realm.executeTransaction(realm -> {
+                                realm.copyToRealmOrUpdate(o);
+                            });
+                        }
+
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(KomentarObject.class);
+                        realm.commitTransaction();
                     }
                 }
             }

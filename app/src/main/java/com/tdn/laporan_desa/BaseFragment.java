@@ -87,6 +87,20 @@ public class BaseFragment extends Fragment {
         startActivityForResult(intent, REQUEST_IMAGE);
     }
 
+    protected void showImagePickerOptions() {
+        ImagePickerActivity.showImagePickerOptions(getContext(), new ImagePickerActivity.PickerOptionListener() {
+            @Override
+            public void onTakeCameraSelected() {
+                launchCameraIntent();
+            }
+
+            @Override
+            public void onChooseGallerySelected() {
+                launchGalleryIntent();
+            }
+        });
+    }
+
     protected void launchGalleryIntent() {
         Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);

@@ -75,7 +75,9 @@ public class HomePage extends Fragment {
     private AdapterLaporanClicked onClicked = new AdapterLaporanClicked() {
         @Override
         public void onComment(int pos) {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_komentar);
+            Bundle bundle = new Bundle();
+            bundle.putString("id_laporan", adapterLaporan.getData(pos).getIdLaporan().toString());
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_komentar, bundle);
         }
 
         @Override
