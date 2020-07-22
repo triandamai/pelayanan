@@ -2,11 +2,12 @@ package com.tdn.domain.serialize.res;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.tdn.domain.model.ChatModel;
+import com.tdn.domain.model.ConversationModel;
 
 import java.util.List;
 
-public class ResponseGetChat {
+public class ResponseGetConversation {
+
     @SerializedName("status")
     @Expose
     private Boolean status;
@@ -18,7 +19,7 @@ public class ResponseGetChat {
     private String responseMessage;
     @SerializedName("data")
     @Expose
-    private List<ChatModel> data = null;
+    private List<ConversationModel> data = null;
 
     public Boolean getStatus() {
         return status;
@@ -44,17 +45,17 @@ public class ResponseGetChat {
         this.responseMessage = responseMessage;
     }
 
-    public List<ChatModel> getData() {
+    public List<ConversationModel> getData() {
         return data;
     }
 
-    public void setData(List<ChatModel> data) {
+    public void setData(List<ConversationModel> data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "ResponseGetChat{" +
+        return "ResponseGetConversation{" +
                 "status=" + status +
                 ", responseCode=" + responseCode +
                 ", responseMessage='" + responseMessage + '\'' +
