@@ -1,40 +1,67 @@
-package com.tdn.domain.realmobject;
+package com.tdn.domain.model;
 
-import com.tdn.domain.model.ChatModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.tdn.domain.realmobject.ConversationObject;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class ConversationModel extends BaseModel {
 
-public class ChatObject extends RealmObject {
-    @PrimaryKey
-    String idChat;
-
+    @SerializedName("sender_id")
+    @Expose
     private String senderId;
-
+    @SerializedName("sender_nama")
+    @Expose
     private String senderNama;
-
+    @SerializedName("sender_media")
+    @Expose
     private String senderMedia;
-
+    @SerializedName("sender_alamat")
+    @Expose
     private String senderAlamat;
-
+    @SerializedName("sender_username")
+    @Expose
     private String senderUsername;
-
+    @SerializedName("sender_level")
+    @Expose
     private String senderLevel;
-
+    @SerializedName("receiver_id")
+    @Expose
     private String receiverId;
-
+    @SerializedName("receiver_nama")
+    @Expose
     private String receiverNama;
-
+    @SerializedName("receiver_media")
+    @Expose
     private String receiverMedia;
-
+    @SerializedName("receiver_alamat")
+    @Expose
     private String receiverAlamat;
-
+    @SerializedName("receiver_username")
+    @Expose
     private String receiverUsername;
-
+    @SerializedName("receiver_level")
+    @Expose
     private String receiverLevel;
-
+    @SerializedName("id_detail_chat")
+    @Expose
+    private String idDetailChat;
+    @SerializedName("id_chat")
+    @Expose
+    private String idChat;
+    @SerializedName("body")
+    @Expose
+    private String body;
+    @SerializedName("media")
+    @Expose
+    private String media;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("created_at")
+    @Expose
     private String createdAt;
-
+    @SerializedName("updated_at")
+    @Expose
     private String updatedAt;
 
     public String getSenderId() {
@@ -133,12 +160,44 @@ public class ChatObject extends RealmObject {
         this.receiverLevel = receiverLevel;
     }
 
+    public String getIdDetailChat() {
+        return idDetailChat;
+    }
+
+    public void setIdDetailChat(String idDetailChat) {
+        this.idDetailChat = idDetailChat;
+    }
+
     public String getIdChat() {
         return idChat;
     }
 
     public void setIdChat(String idChat) {
         this.idChat = idChat;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCreatedAt() {
@@ -159,9 +218,8 @@ public class ChatObject extends RealmObject {
 
     @Override
     public String toString() {
-        return "ChatObject{" +
-                "idChat='" + idChat + '\'' +
-                ", senderId='" + senderId + '\'' +
+        return "ConversationModel{" +
+                "senderId='" + senderId + '\'' +
                 ", senderNama='" + senderNama + '\'' +
                 ", senderMedia='" + senderMedia + '\'' +
                 ", senderAlamat='" + senderAlamat + '\'' +
@@ -173,29 +231,38 @@ public class ChatObject extends RealmObject {
                 ", receiverAlamat='" + receiverAlamat + '\'' +
                 ", receiverUsername='" + receiverUsername + '\'' +
                 ", receiverLevel='" + receiverLevel + '\'' +
+                ", idDetailChat='" + idDetailChat + '\'' +
+                ", idChat='" + idChat + '\'' +
+                ", body='" + body + '\'' +
+                ", media='" + media + '\'' +
+                ", type='" + type + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
 
-    public Object ToModel() {
-        ChatModel o = new ChatModel();
+    @Override
+    public Object ToObject() {
+        ConversationObject o = new ConversationObject();
+        o.setBody(body);
         o.setCreatedAt(createdAt);
         o.setIdChat(idChat);
+        o.setIdDetailChat(idDetailChat);
+        o.setMedia(media);
         o.setReceiverAlamat(receiverAlamat);
         o.setReceiverId(receiverId);
         o.setReceiverLevel(receiverLevel);
         o.setReceiverMedia(receiverMedia);
         o.setReceiverNama(receiverNama);
-        o.setReceiverUsername(receiverUsername);
+        o.setReceiverUsername(senderUsername);
         o.setSenderAlamat(senderAlamat);
         o.setSenderId(senderId);
         o.setSenderLevel(senderLevel);
         o.setSenderMedia(senderMedia);
         o.setSenderNama(senderNama);
         o.setSenderUsername(senderUsername);
+        o.setType(type);
         o.setUpdatedAt(updatedAt);
-
         return o;
     }
 }

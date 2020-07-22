@@ -1,13 +1,11 @@
 package com.tdn.domain.realmobject;
 
-import com.tdn.domain.model.ChatModel;
+import com.tdn.domain.model.ConversationModel;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class ChatObject extends RealmObject {
-    @PrimaryKey
-    String idChat;
+public class ConversationObject extends RealmObject {
 
     private String senderId;
 
@@ -32,6 +30,16 @@ public class ChatObject extends RealmObject {
     private String receiverUsername;
 
     private String receiverLevel;
+    @PrimaryKey
+    private String idDetailChat;
+
+    private String idChat;
+
+    private String body;
+
+    private String media;
+
+    private String type;
 
     private String createdAt;
 
@@ -133,12 +141,44 @@ public class ChatObject extends RealmObject {
         this.receiverLevel = receiverLevel;
     }
 
+    public String getIdDetailChat() {
+        return idDetailChat;
+    }
+
+    public void setIdDetailChat(String idDetailChat) {
+        this.idDetailChat = idDetailChat;
+    }
+
     public String getIdChat() {
         return idChat;
     }
 
     public void setIdChat(String idChat) {
         this.idChat = idChat;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCreatedAt() {
@@ -159,9 +199,8 @@ public class ChatObject extends RealmObject {
 
     @Override
     public String toString() {
-        return "ChatObject{" +
-                "idChat='" + idChat + '\'' +
-                ", senderId='" + senderId + '\'' +
+        return "ConversationObject{" +
+                "senderId='" + senderId + '\'' +
                 ", senderNama='" + senderNama + '\'' +
                 ", senderMedia='" + senderMedia + '\'' +
                 ", senderAlamat='" + senderAlamat + '\'' +
@@ -173,29 +212,37 @@ public class ChatObject extends RealmObject {
                 ", receiverAlamat='" + receiverAlamat + '\'' +
                 ", receiverUsername='" + receiverUsername + '\'' +
                 ", receiverLevel='" + receiverLevel + '\'' +
+                ", idDetailChat='" + idDetailChat + '\'' +
+                ", idChat='" + idChat + '\'' +
+                ", body='" + body + '\'' +
+                ", media='" + media + '\'' +
+                ", type='" + type + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
 
     public Object ToModel() {
-        ChatModel o = new ChatModel();
+        ConversationModel o = new ConversationModel();
+        o.setBody(body);
         o.setCreatedAt(createdAt);
         o.setIdChat(idChat);
+        o.setIdDetailChat(idDetailChat);
+        o.setMedia(media);
         o.setReceiverAlamat(receiverAlamat);
         o.setReceiverId(receiverId);
         o.setReceiverLevel(receiverLevel);
         o.setReceiverMedia(receiverMedia);
         o.setReceiverNama(receiverNama);
-        o.setReceiverUsername(receiverUsername);
+        o.setReceiverUsername(senderUsername);
         o.setSenderAlamat(senderAlamat);
         o.setSenderId(senderId);
         o.setSenderLevel(senderLevel);
         o.setSenderMedia(senderMedia);
         o.setSenderNama(senderNama);
         o.setSenderUsername(senderUsername);
+        o.setType(type);
         o.setUpdatedAt(updatedAt);
-
         return o;
     }
 }
