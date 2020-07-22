@@ -10,15 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.tdn.laporan_desa.R;
 import com.tdn.laporan_desa.VmFactory;
+import com.tdn.laporan_desa.callback.AdapterClicked;
 import com.tdn.laporan_desa.databinding.ChatFragmentBinding;
 
 public class Chat extends Fragment {
 
     private ChatViewModel mViewModel;
     private ChatFragmentBinding binding;
+    private AdapterChat adapterChat;
 
     public static Chat newInstance() {
         return new Chat();
@@ -28,15 +31,37 @@ public class Chat extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.chat_fragment, container, false);
+        mViewModel = new ViewModelProvider(requireActivity(), new VmFactory(getContext())).get(ChatViewModel.class);
         binding.setVm(mViewModel);
+        adapterChat = new AdapterChat(adapterClicked);
+        binding.setIsRefresh(false);
+        binding.setRefresh(refreshListener);
+        binding.rv.setAdapter(adapterChat);
         return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity(), new VmFactory(getContext())).get(ChatViewModel.class);
-        // TODO: Use the ViewModel
+    public void onResume() {
+        super.onResume();
+        observe(mViewModel);
     }
+
+    private void observe(ChatViewModel mViewModel) {
+        mViewModel.getUserObjectLiveData().observe(getViewLifecycleOwner(), chatObjects -> {
+            if (chatObjects != null) {
+                adapterChat.setData(chatObjects);
+            }
+
+        });
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener refreshListener = () -> {
+        mViewModel.fetchfromApi();
+        mViewModel.fetchfromLocal();
+        binding.setIsRefresh(false);
+    };
+    private AdapterClicked adapterClicked = pos -> {
+
+    };
 
 }

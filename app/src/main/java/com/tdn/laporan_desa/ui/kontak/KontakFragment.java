@@ -14,8 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.tdn.laporan_desa.R;
 import com.tdn.laporan_desa.VmFactory;
+import com.tdn.laporan_desa.callback.ActionListener;
 import com.tdn.laporan_desa.callback.AdapterClicked;
 import com.tdn.laporan_desa.databinding.KontakFragmentBinding;
 
@@ -45,7 +48,7 @@ public class KontakFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new VmFactory(getContext())).get(KontakViewModel.class);
+        mViewModel = new ViewModelProvider(this, new VmFactory(getContext(), actionListener)).get(KontakViewModel.class);
 
         // TODO: Use the ViewModel
     }
@@ -81,11 +84,30 @@ public class KontakFragment extends Fragment {
         builder.setItems(aksi, (dialog, which) -> {
             switch (which) {
                 case 0:
-                    Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_chat);
+                    mViewModel.startChat();
                     break;
             }
         }).create();
         builder.show();
+    };
+
+
+    private ActionListener actionListener = new ActionListener() {
+        @Override
+        public void onStart() {
+            Snackbar.make(binding.getRoot(), "Mohon Tunggu..", BaseTransientBottomBar.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onSuccess(String message) {
+            Snackbar.make(binding.getRoot(), "Memulai percakapan...", BaseTransientBottomBar.LENGTH_LONG).show();
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_chat);
+        }
+
+        @Override
+        public void onError(String message) {
+            Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
+        }
     };
 
 }

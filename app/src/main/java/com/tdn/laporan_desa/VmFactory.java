@@ -12,9 +12,11 @@ import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.laporan_desa.auth.LoginViewModel;
 import com.tdn.laporan_desa.callback.ActionListener;
 import com.tdn.laporan_desa.ui.chat.ChatViewModel;
+import com.tdn.laporan_desa.ui.chat.ConversationViewModel;
 import com.tdn.laporan_desa.ui.datauser.DataUserViewModel;
 import com.tdn.laporan_desa.ui.home.HomePageViewModel;
 import com.tdn.laporan_desa.ui.komentar.KomentarViewModel;
+import com.tdn.laporan_desa.ui.kontak.KontakViewModel;
 import com.tdn.laporan_desa.ui.tambahlaporan.TambahLaporanViewModel;
 import com.tdn.laporan_desa.ui.tambahuser.TambahUserViewModel;
 
@@ -78,9 +80,13 @@ public class VmFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(TambahUserViewModel.class)) {
             return (T) new TambahUserViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(ChatViewModel.class)) {
-            return (T) new ChatViewModel(context, actionListener);
+            return (T) new ChatViewModel(context);
+        } else if (modelClass.isAssignableFrom(ConversationViewModel.class)) {
+            return (T) new ConversationViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(KomentarViewModel.class)) {
             return (T) new KomentarViewModel(context, actionListener, id);
+        } else if (modelClass.isAssignableFrom(KontakViewModel.class)) {
+            return (T) new KontakViewModel(context, actionListener);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
