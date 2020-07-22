@@ -2,6 +2,7 @@ package com.tdn.laporan_desa.ui.tambahlaporan;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -77,21 +78,11 @@ public class TambahLaporan extends BaseFragment {
                     }).check();
 
         });
-        binding.judul.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mViewModel.judul.setValue(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+        binding.judul.setOnClickListener(v -> {
+            String[] item = {"Sosial", "Keamanan", "Pendidikan"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setItems(item, (dialog, which) -> mViewModel.judul.setValue(item[which])).create();
+            builder.show();
         });
         binding.isi.addTextChangedListener(new TextWatcher() {
             @Override

@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="@dimen/dp_160"
             android:layout_height="@dimen/dp_160"
-            android:src="@drawable/ic_user2" />
+            android:src="@drawable/logo_desa" />
 
         <TextView
             android:layout_width="wrap_content"
