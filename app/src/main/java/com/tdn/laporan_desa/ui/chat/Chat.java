@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.tdn.Static;
+import com.tdn.data.persistensi.MyUser;
 import com.tdn.laporan_desa.R;
 import com.tdn.laporan_desa.VmFactory;
 import com.tdn.laporan_desa.callback.AdapterClicked;
@@ -61,7 +63,7 @@ public class Chat extends Fragment {
         binding.setIsRefresh(false);
     };
     private AdapterClicked adapterClicked = pos -> {
-
+        MyUser.getInstance(getContext()).setId(Static.KEY_LAST_CHAT_ID, adapterChat.getFromPosition(pos).getIdChat());
     };
 
 }

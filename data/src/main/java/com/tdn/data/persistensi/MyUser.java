@@ -67,7 +67,7 @@ public class MyUser {
         editor.apply();
     }
 
-    public void reserId(String key) {
+    public void resetId(String key) {
         editor.remove(key);
     }
 

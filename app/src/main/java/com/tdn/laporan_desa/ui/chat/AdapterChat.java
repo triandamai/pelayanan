@@ -74,6 +74,10 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> 
         }
     }
 
+    public ChatObject getFromPosition(int pos) {
+        return user.get(pos);
+    }
+
     @Override
     public int getItemCount() {
         return user == null ? 0 : user.size();

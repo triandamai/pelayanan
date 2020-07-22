@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.tdn.Static;
 import com.tdn.data.local.RealmLiveResult;
 import com.tdn.data.persistensi.MyUser;
 import com.tdn.data.repository.Repository;
@@ -50,7 +51,7 @@ public class ConversationViewModel extends ViewModel {
 
     public void fetchfromApi() {
 
-        Repository.getInstance(context).getAllConverastion(MyUser.getInstance(context).getUser().getIdUser());
+        Repository.getInstance(context).getAllConverastion(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, ""));
 
     }
 

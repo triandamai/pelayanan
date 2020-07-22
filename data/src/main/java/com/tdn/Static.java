@@ -7,6 +7,7 @@ public class Static {
     public static final String TIPE_CONV_TEXT = "text";
     public static final String TIPE_CONV_IMAGE = "image";
     public static final String TIPE_CONV_TEXTANDAIMAGE = "textandimage";
+    public static final String KEY_LAST_CHAT_ID = "idChat";
 
 
 }
