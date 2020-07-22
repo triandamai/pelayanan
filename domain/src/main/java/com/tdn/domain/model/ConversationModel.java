@@ -48,6 +48,9 @@ public class ConversationModel extends BaseModel {
     @SerializedName("id_chat")
     @Expose
     private String idChat;
+    @SerializedName("status_detail")
+    @Expose
+    private String statusDetail;
     @SerializedName("body")
     @Expose
     private String body;
@@ -176,6 +179,14 @@ public class ConversationModel extends BaseModel {
         this.idChat = idChat;
     }
 
+    public String getStatusDetail() {
+        return statusDetail;
+    }
+
+    public void setStatusDetail(String statusDetail) {
+        this.statusDetail = statusDetail;
+    }
+
     public String getBody() {
         return body;
     }
@@ -233,6 +244,7 @@ public class ConversationModel extends BaseModel {
                 ", receiverLevel='" + receiverLevel + '\'' +
                 ", idDetailChat='" + idDetailChat + '\'' +
                 ", idChat='" + idChat + '\'' +
+                ", statusDetail='" + statusDetail + '\'' +
                 ", body='" + body + '\'' +
                 ", media='" + media + '\'' +
                 ", type='" + type + '\'' +
@@ -263,6 +275,7 @@ public class ConversationModel extends BaseModel {
         o.setSenderUsername(senderUsername);
         o.setType(type);
         o.setUpdatedAt(updatedAt);
+        o.setStatusDetail(statusDetail);
         return o;
     }
 }

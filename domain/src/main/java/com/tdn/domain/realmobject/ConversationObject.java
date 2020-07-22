@@ -45,6 +45,8 @@ public class ConversationObject extends RealmObject {
 
     private String updatedAt;
 
+    private String statusDetail;
+
     public String getSenderId() {
         return senderId;
     }
@@ -197,6 +199,14 @@ public class ConversationObject extends RealmObject {
         this.updatedAt = updatedAt;
     }
 
+    public String getStatusDetail() {
+        return statusDetail;
+    }
+
+    public void setStatusDetail(String statusDetail) {
+        this.statusDetail = statusDetail;
+    }
+
     @Override
     public String toString() {
         return "ConversationObject{" +
@@ -219,6 +229,7 @@ public class ConversationObject extends RealmObject {
                 ", type='" + type + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
+                ", statusDetail='" + statusDetail + '\'' +
                 '}';
     }
 
@@ -243,6 +254,7 @@ public class ConversationObject extends RealmObject {
         o.setSenderUsername(senderUsername);
         o.setType(type);
         o.setUpdatedAt(updatedAt);
+        o.setStatusDetail(statusDetail);
         return o;
     }
 }

@@ -6,14 +6,17 @@ import android.util.Log;
 import com.tdn.Static;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.model.ChatModel;
+import com.tdn.domain.model.ConversationModel;
 import com.tdn.domain.model.KomentarModel;
 import com.tdn.domain.model.LaporanModel;
 import com.tdn.domain.model.UserModel;
 import com.tdn.domain.realmobject.ChatObject;
+import com.tdn.domain.realmobject.ConversationObject;
 import com.tdn.domain.realmobject.KomentarObject;
 import com.tdn.domain.realmobject.LaporanObject;
 import com.tdn.domain.realmobject.UserObject;
 import com.tdn.domain.serialize.res.ResponseGetChat;
+import com.tdn.domain.serialize.res.ResponseGetConversation;
 import com.tdn.domain.serialize.res.ResponseGetKomentar;
 import com.tdn.domain.serialize.res.ResponseGetLaporan;
 import com.tdn.domain.serialize.res.ResponseGetUser;
@@ -316,6 +319,84 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseGetChat> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
+
+    }
+
+    public void getAllConversation() {
+        service.getAllConversation().enqueue(new Callback<ResponseGetConversation>() {
+            @Override
+            public void onResponse(Call<ResponseGetConversation> call, Response<ResponseGetConversation> response) {
+                Log.e(TAG, response.toString());
+
+                if (cek(response.code())) {
+                    Log.e(TAG, response.body().toString());
+
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
+                        realm.beginTransaction();
+                        realm.delete(ConversationObject.class);
+                        realm.commitTransaction();
+                        for (ConversationModel data : response.body().getData()) {
+                            if (data.getStatusDetail().equalsIgnoreCase(Static.STATUS_ADA)) {
+                                ChatObject o = (ChatObject) data.ToObject();
+                                Log.e("tes", o.toString());
+                                realm.executeTransaction(realm -> {
+                                    realm.copyToRealmOrUpdate(o);
+                                });
+                            }
+                        }
+
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(ChatObject.class);
+                        realm.commitTransaction();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetConversation> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
+
+    }
+
+    public void getAllConverastion(String id) {
+        service.getAllConversation().enqueue(new Callback<ResponseGetConversation>() {
+            @Override
+            public void onResponse(Call<ResponseGetConversation> call, Response<ResponseGetConversation> response) {
+                Log.e(TAG, response.toString());
+
+                if (cek(response.code())) {
+                    Log.e(TAG, response.body().toString());
+
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
+                        realm.beginTransaction();
+                        realm.delete(ConversationObject.class);
+                        realm.commitTransaction();
+                        for (ConversationModel data : response.body().getData()) {
+                            if (data.getStatusDetail().equalsIgnoreCase(Static.STATUS_ADA)) {
+                                ChatObject o = (ChatObject) data.ToObject();
+                                Log.e("tes", o.toString());
+                                realm.executeTransaction(realm -> {
+                                    realm.copyToRealmOrUpdate(o);
+                                });
+                            }
+                        }
+
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(ChatObject.class);
+                        realm.commitTransaction();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetConversation> call, Throwable t) {
                 Log.e(TAG, t.toString());
             }
         });
