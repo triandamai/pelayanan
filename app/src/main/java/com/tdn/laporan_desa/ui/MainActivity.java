@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 fab.setOnClickListener(v -> {
                     navController.navigate(R.id.nav_tambah_laporan);
                 });
+            } else if (id == R.id.nav_chat) {
+                fab.setVisibility(View.VISIBLE);
+                fab.setOnClickListener(v -> {
+                    navController.navigate(R.id.nav_kontak);
+                });
             } else if (id == R.id.nav_datauser) {
                 fab.setVisibility(View.VISIBLE);
                 fab.setOnClickListener(v -> {

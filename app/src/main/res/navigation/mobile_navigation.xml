@@ -16,9 +16,18 @@
         android:id="@+id/nav_chat"
         android:name="com.tdn.laporan_desa.ui.chat.Chat"
         android:label="@string/menu_chat"
-        tools:layout="@layout/chat_fragment">
+        tools:layout="@layout/chat_fragment"></fragment>
+    <fragment
+        android:id="@+id/nav_kontak"
+        android:name="com.tdn.laporan_desa.ui.kontak.KontakFragment"
+        android:label="@string/menu_chat"
+        tools:layout="@layout/kontak_fragment"></fragment>
 
-    </fragment>
+    <fragment
+        android:id="@+id/nav_conversation"
+        android:name="com.tdn.laporan_desa.ui.chat.ConversationFragment"
+        android:label="@string/menu_chat"
+        tools:layout="@layout/conversation_fragment"></fragment>
 
     <fragment
         android:id="@+id/nav_tambah_laporan"
