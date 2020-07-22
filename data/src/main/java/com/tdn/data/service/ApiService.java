@@ -2,6 +2,8 @@ package com.tdn.data.service;
 
 import com.tdn.domain.model.KomentarModel;
 import com.tdn.domain.model.UserModel;
+import com.tdn.domain.serialize.req.ChatPostReq;
+import com.tdn.domain.serialize.req.ConversationPostReq;
 import com.tdn.domain.serialize.req.KomentarPostReq;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.domain.serialize.req.LoginPostReq;
@@ -110,12 +112,20 @@ public interface ApiService {
     Call<ResponseGetChat> getChatById(@Query("id") String id);
 
     @Headers({accept_json, content_type, api_key})
+    @POST("chat/chat")
+    Call<ResponsePostPutDel> postChat(@Body ChatPostReq chatPostReq);
+
+    @Headers({accept_json, content_type, api_key})
     @GET("conversation/conversation")
     Call<ResponseGetConversation> getAllConversation();
 
     @Headers({accept_json, content_type, api_key})
     @GET("conversation/conversation")
     Call<ResponseGetConversation> getConversationById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("conversation/conversation")
+    Call<ResponsePostPutDel> postConversation(@Body ConversationPostReq conversationPostReq);
 
     class Factory {
         public static ApiService create() {
