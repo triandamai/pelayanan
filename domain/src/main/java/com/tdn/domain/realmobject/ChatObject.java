@@ -33,6 +33,8 @@ public class ChatObject extends RealmObject {
 
     private String receiverLevel;
 
+    private String status;
+
     private String createdAt;
 
     private String updatedAt;
@@ -157,6 +159,14 @@ public class ChatObject extends RealmObject {
         this.updatedAt = updatedAt;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ChatObject{" +
@@ -173,6 +183,7 @@ public class ChatObject extends RealmObject {
                 ", receiverAlamat='" + receiverAlamat + '\'' +
                 ", receiverUsername='" + receiverUsername + '\'' +
                 ", receiverLevel='" + receiverLevel + '\'' +
+                ", status='" + status + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
@@ -195,6 +206,7 @@ public class ChatObject extends RealmObject {
         o.setSenderNama(senderNama);
         o.setSenderUsername(senderUsername);
         o.setUpdatedAt(updatedAt);
+        o.setStatus(status);
 
         return o;
     }

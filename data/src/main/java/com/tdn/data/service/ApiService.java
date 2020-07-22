@@ -6,6 +6,8 @@ import com.tdn.domain.serialize.req.KomentarPostReq;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.domain.serialize.req.LoginPostReq;
 import com.tdn.domain.serialize.req.UserPostReq;
+import com.tdn.domain.serialize.res.ResponseGetChat;
+import com.tdn.domain.serialize.res.ResponseGetConversation;
 import com.tdn.domain.serialize.res.ResponseGetKomentar;
 import com.tdn.domain.serialize.res.ResponseGetLaporan;
 import com.tdn.domain.serialize.res.ResponseGetUser;
@@ -57,15 +59,11 @@ public interface ApiService {
 
     @Headers({accept_json, content_type, api_key})
     @GET("komentar/komentar")
-    Call<ResponseGetKomentar> getAllKomentar(@Query("id") String id);
-
-    @Headers({accept_json, content_type, api_key})
-    @GET("komentar/komentar")
     Call<ResponseGetKomentar> getAllKomentar();
 
     @Headers({accept_json, content_type, api_key})
     @GET("komentar/komentar")
-    Call<ResponseGetKomentar> getKomentarById();
+    Call<ResponseGetKomentar> getKomentarById(@Query("id") String id);
 
     @Headers({accept_json, content_type, api_key})
     @POST("user/users")
@@ -102,6 +100,22 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @DELETE("komentar/komentar")
     Call<ResponsePostPutDel> deleteKomentar(@Body KomentarModel komentarModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("chat/chat")
+    Call<ResponseGetChat> getAllChat();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("chat/chat")
+    Call<ResponseGetChat> getChatById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("conversation/conversation")
+    Call<ResponseGetConversation> getAllConversation();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("conversation/conversation")
+    Call<ResponseGetConversation> getConversationById(@Query("id") String id);
 
     class Factory {
         public static ApiService create() {

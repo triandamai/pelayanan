@@ -45,6 +45,9 @@ public class ChatModel extends BaseModel {
     @SerializedName("id_chat")
     @Expose
     private String idChat;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -172,6 +175,14 @@ public class ChatModel extends BaseModel {
         this.updatedAt = updatedAt;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ChatModel{" +
@@ -188,6 +199,7 @@ public class ChatModel extends BaseModel {
                 ", receiverUsername='" + receiverUsername + '\'' +
                 ", receiverLevel='" + receiverLevel + '\'' +
                 ", idChat='" + idChat + '\'' +
+                ", status='" + status + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
@@ -211,6 +223,7 @@ public class ChatModel extends BaseModel {
         o.setSenderNama(senderNama);
         o.setSenderUsername(senderUsername);
         o.setUpdatedAt(updatedAt);
+        o.setStatus(status);
         return o;
     }
 }
