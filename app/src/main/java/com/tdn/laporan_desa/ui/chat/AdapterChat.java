@@ -8,17 +8,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tdn.domain.realmobject.UserObject;
+import com.tdn.domain.realmobject.ChatObject;
 import com.tdn.laporan_desa.R;
 import com.tdn.laporan_desa.callback.AdapterClicked;
-import com.tdn.laporan_desa.databinding.ItemUserBinding;
+import com.tdn.laporan_desa.databinding.ItemChatBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> {
-    private List<UserObject> user = new ArrayList<>();
+    private List<ChatObject> user = new ArrayList<>();
     private AdapterClicked listener;
 
 
@@ -29,7 +29,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemUserBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user, parent, false);
+        ItemChatBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_chat, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -40,7 +40,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> 
         holder.binding.setPos(position);
     }
 
-    public void setData(List<UserObject> l) {
+    public void setData(List<ChatObject> l) {
         if (this.user == null) {
             this.user = l;
         } else {
@@ -57,13 +57,13 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> 
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return AdapterChat.this.user.get(oldItemPosition).getIdUser() == l.get(newItemPosition).getIdUser();
+                    return AdapterChat.this.user.get(oldItemPosition).getIdChat() == l.get(newItemPosition).getIdChat();
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    UserObject lama = l.get(oldItemPosition);
-                    UserObject baru = l.get(newItemPosition);
+                    ChatObject lama = l.get(oldItemPosition);
+                    ChatObject baru = l.get(newItemPosition);
                     return lama == baru && Objects.equals(lama, baru);
                 }
             });
@@ -80,9 +80,9 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ItemUserBinding binding;
+        private ItemChatBinding binding;
 
-        public MyViewHolder(@NonNull ItemUserBinding itemView) {
+        public MyViewHolder(@NonNull ItemChatBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }
