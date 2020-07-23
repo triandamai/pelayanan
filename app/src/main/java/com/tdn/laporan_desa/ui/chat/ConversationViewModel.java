@@ -17,6 +17,7 @@ import com.tdn.domain.serialize.req.ConversationPostReq;
 import com.tdn.domain.serialize.res.ResponsePostPutDel;
 import com.tdn.laporan_desa.callback.ActionListener;
 
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -33,6 +34,7 @@ public class ConversationViewModel extends ViewModel {
     private ActionListener actionListener;
     private Realm realm;
     public ObservableField<Boolean> isLoading = new ObservableField<>();
+    public ObservableField<String> body = new ObservableField<>();
     public LiveData<List<ConversationObject>> userObjectLiveData;
 
     public ConversationViewModel(Context context, ActionListener actionListener) {
@@ -64,27 +66,38 @@ public class ConversationViewModel extends ViewModel {
 
     public void sendChat() {
         actionListener.onStart();
+        if (!body.get().isEmpty()) {
+            ConversationPostReq post = new ConversationPostReq();
+            post.setBody(body.get().toString());
+            post.setCreatedAt(String.valueOf(new Date().getTime()));
+            post.setUpdatedAt(String.valueOf(new Date().getTime()));
+            post.setFromSender(MyUser.getInstance(context).getUser().getIdUser());
+            post.setIdChat(String.valueOf(new Date().getTime()));
+            post.setStatusDetail(Static.STATUS_ADA);
+            post.setToReceiver(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, "kosong"));
+            post.setType(Static.TIPE_CONV_TEXT);
 
-        ConversationPostReq post = new ConversationPostReq();
-        post.setBody("");
-        apiService.postConversation(post).enqueue(new Callback<ResponsePostPutDel>() {
-            @Override
-            public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
-                if (cek(response.code())) {
-                    if (cek(response.body().getResponseCode())) {
+            apiService.postConversation(post).enqueue(new Callback<ResponsePostPutDel>() {
+                @Override
+                public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
+                    if (cek(response.code())) {
+                        if (cek(response.body().getResponseCode())) {
 
+                        } else {
+                            actionListener.onError(response.body().getResponseMessage());
+                        }
                     } else {
-                        actionListener.onError(response.body().getResponseMessage());
+                        actionListener.onError(response.message());
                     }
-                } else {
-                    actionListener.onError(response.message());
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
-                actionListener.onError(t.getLocalizedMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
+                    actionListener.onError(t.getLocalizedMessage());
+                }
+            });
+        } else {
+            actionListener.onError("Isi Semua Field!");
+        }
     }
 }

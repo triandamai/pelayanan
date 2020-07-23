@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.tdn.Static;
 import com.tdn.data.local.RealmLiveResult;
+import com.tdn.data.persistensi.MyUser;
 import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.realmobject.UserObject;
@@ -15,6 +17,7 @@ import com.tdn.domain.serialize.req.ChatPostReq;
 import com.tdn.domain.serialize.res.ResponsePostPutDel;
 import com.tdn.laporan_desa.callback.ActionListener;
 
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -31,6 +34,7 @@ public class KontakViewModel extends ViewModel {
     private ActionListener actionListener;
     private Realm realm;
     public ObservableField<Boolean> isLoading = new ObservableField<>();
+    public ObservableField<String> idReceiver = new ObservableField<>();
     public LiveData<List<UserObject>> userObjectLiveData;
 
     public KontakViewModel(Context context, ActionListener actionListener) {
@@ -62,25 +66,35 @@ public class KontakViewModel extends ViewModel {
 
     public void startChat() {
         actionListener.onStart();
-        ChatPostReq chat = new ChatPostReq();
-        apiService.postChat(chat).enqueue(new Callback<ResponsePostPutDel>() {
-            @Override
-            public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
-                if (cek(response.code())) {
-                    if (cek(response.body().getResponseCode())) {
-                        actionListener.onSuccess(response.body().getResponseMessage());
+        if (!idReceiver.get().isEmpty()) {
+            ChatPostReq chat = new ChatPostReq();
+            chat.setCreatedAt(String.valueOf(new Date().getTime()));
+            chat.setIdChat(String.valueOf(new Date().getTime()));
+            chat.setIdReceiver(idReceiver.get().toString());
+            chat.setIdSender(MyUser.getInstance(context).getUser().getIdUser());
+            chat.setStatus(Static.STATUS_ADA);
+            chat.setUpdatedAt(String.valueOf(new Date().getTime()));
+            apiService.postChat(chat).enqueue(new Callback<ResponsePostPutDel>() {
+                @Override
+                public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
+                    if (cek(response.code())) {
+                        if (cek(response.body().getResponseCode())) {
+                            actionListener.onSuccess(response.body().getResponseMessage());
+                        } else {
+                            actionListener.onError(response.body().getResponseMessage());
+                        }
                     } else {
-                        actionListener.onError(response.body().getResponseMessage());
+                        actionListener.onError(response.message());
                     }
-                } else {
-                    actionListener.onError(response.message());
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
-                actionListener.onError(t.getLocalizedMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
+                    actionListener.onError(t.getLocalizedMessage());
+                }
+            });
+        } else {
+            actionListener.onError("Isi Semua!");
+        }
     }
 }
