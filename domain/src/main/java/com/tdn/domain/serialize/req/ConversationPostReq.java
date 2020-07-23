@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ConversationPostReq {
+    @SerializedName("id_detail_chat")
+    @Expose
+    private String idDetailChat;
     @SerializedName("id_chat")
     @Expose
     private String idChat;
@@ -31,6 +34,14 @@ public class ConversationPostReq {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
+    public String getIdDetailChat() {
+        return idDetailChat;
+    }
+
+    public void setIdDetailChat(String idDetailChat) {
+        this.idDetailChat = idDetailChat;
+    }
 
     public String getIdChat() {
         return idChat;
@@ -107,7 +118,8 @@ public class ConversationPostReq {
     @Override
     public String toString() {
         return "ConversationPostReq{" +
-                "idChat='" + idChat + '\'' +
+                "idDetailChat='" + idDetailChat + '\'' +
+                ", idChat='" + idChat + '\'' +
                 ", fromSender='" + fromSender + '\'' +
                 ", toReceiver='" + toReceiver + '\'' +
                 ", body='" + body + '\'' +

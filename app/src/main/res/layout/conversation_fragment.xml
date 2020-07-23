@@ -35,6 +35,7 @@
                 app:shimmer_recycler_layout="@layout/item_shimmer_laporan" />
 
             <RelativeLayout
+                android:id="@+id/rl_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
@@ -43,17 +44,28 @@
                     android:id="@+id/et_isi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="100dp"
+                    android:layout_marginRight="80dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/bg_conversation"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:padding="@dimen/padding_10"
                     android:hint="Ketikkan pesan.." />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_send"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="@dimen/dp_16"
-                    android:layout_alignParentRight="true" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_send"
+                    android:layout_margin="15dp"
+                    app:fabSize="normal"
+                    app:borderWidth="0dp"
+                    app:elevation="0dp"
+                    android:backgroundTint="@color/biru" />
+
             </RelativeLayout>
         </RelativeLayout>
 

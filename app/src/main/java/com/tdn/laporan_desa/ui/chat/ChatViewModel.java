@@ -42,7 +42,7 @@ public class ChatViewModel extends ViewModel {
 
     public void fetchfromApi() {
 
-        Repository.getInstance(context).getAllUser(MyUser.getInstance(context).getUser().getIdUser());
+        Repository.getInstance(context).getAllChat(MyUser.getInstance(context).getUser().getIdUser());
 
     }
 

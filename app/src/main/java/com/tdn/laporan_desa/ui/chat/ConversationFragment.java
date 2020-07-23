@@ -53,12 +53,15 @@ public class ConversationFragment extends Fragment {
 
     private void observe(ConversationViewModel mViewModel) {
         mViewModel.getUserObjectLiveData().observe(getViewLifecycleOwner(), conversationObjects -> {
-            adapterConversation.setData(conversationObjects);
+            if (conversationObjects != null) {
+                adapterConversation.setData(conversationObjects);
+            }
         });
     }
 
     private void onClick() {
         binding.fabSend.setOnClickListener(v -> {
+            mViewModel.body.set(binding.etIsi.getText().toString());
             mViewModel.sendChat();
         });
     }
@@ -66,19 +69,20 @@ public class ConversationFragment extends Fragment {
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void onStart() {
-            Snackbar.make(binding.rv, "Mengirim", BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(binding.getRoot(), "Mengirim", BaseTransientBottomBar.LENGTH_LONG).show();
         }
 
         @Override
         public void onSuccess(String message) {
-            Snackbar.make(binding.rv, "Terkirim", BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(binding.getRoot(), "Terkirim", BaseTransientBottomBar.LENGTH_LONG).show();
+            binding.etIsi.setText("");
             mViewModel.fetchfromApi();
             mViewModel.fetchfromLocal();
         }
 
         @Override
         public void onError(String message) {
-            Snackbar.make(binding.rv, message, BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
         }
     };
     private SwipeRefreshLayout.OnRefreshListener refreshListener = () -> {
@@ -86,11 +90,8 @@ public class ConversationFragment extends Fragment {
         mViewModel.fetchfromLocal();
         binding.setIsRefresh(false);
     };
-    private AdapterClicked adapterClicked = new AdapterClicked() {
-        @Override
-        public void onClicked(int pos) {
+    private AdapterClicked adapterClicked = pos -> {
 
-        }
     };
 
 }

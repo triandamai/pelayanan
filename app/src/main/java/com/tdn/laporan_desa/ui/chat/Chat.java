@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.tdn.Static;
@@ -35,7 +36,7 @@ public class Chat extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.chat_fragment, container, false);
         mViewModel = new ViewModelProvider(requireActivity(), new VmFactory(getContext())).get(ChatViewModel.class);
         binding.setVm(mViewModel);
-        adapterChat = new AdapterChat(adapterClicked);
+        adapterChat = new AdapterChat(getContext(), adapterClicked);
         binding.setIsRefresh(false);
         binding.setRefresh(refreshListener);
         binding.rv.setAdapter(adapterChat);
@@ -64,6 +65,13 @@ public class Chat extends Fragment {
     };
     private AdapterClicked adapterClicked = pos -> {
         MyUser.getInstance(getContext()).setId(Static.KEY_LAST_CHAT_ID, adapterChat.getFromPosition(pos).getIdChat());
+        if (adapterChat.getFromPosition(pos).getSenderId().equals(MyUser.getInstance(getContext()).getUser().getIdUser())) {
+            MyUser.getInstance(getContext()).setId(Static.KEY_LAST_CHAT_ID_USER, adapterChat.getFromPosition(pos).getReceiverId());
+        } else {
+            MyUser.getInstance(getContext()).setId(Static.KEY_LAST_CHAT_ID_USER, adapterChat.getFromPosition(pos).getSenderId());
+        }
+
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_conversation);
     };
 
 }

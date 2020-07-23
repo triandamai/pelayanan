@@ -48,7 +48,7 @@ public class KontakViewModel extends ViewModel {
 
     public void fetchfromLocal() {
 
-        userObjectLiveData = new RealmLiveResult(realm.where(UserObject.class).findAll());
+        userObjectLiveData = new RealmLiveResult(realm.where(UserObject.class).notEqualTo("idUser", MyUser.getInstance(context).getUser().getIdUser()).findAll());
     }
 
     public void fetchfromApi() {

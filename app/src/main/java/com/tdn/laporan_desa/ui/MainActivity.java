@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
         Picasso.get().load(ApiService.BASE_URL_IMAGE + MyUser.getInstance(this).getUser().getMedia()).into(imageView);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             int id = controller.getCurrentDestination().getId();
-            if (id == R.id.nav_tambah_laporan) {
+            if (id == R.id.nav_tambah_laporan ||
+                    id == R.id.nav_tambah_user ||
+                    id == R.id.nav_komentar ||
+                    id == R.id.nav_conversation) {
                 fab.setVisibility(View.GONE);
-            } else if (id == R.id.nav_tambah_user) {
-                fab.setVisibility(View.GONE);
-            } else if (id == R.id.nav_komentar) {
-                fab.setVisibility(View.GONE);
+
             } else if (id == R.id.nav_home) {
                 fab.setVisibility(View.VISIBLE);
                 fab.setOnClickListener(v -> {

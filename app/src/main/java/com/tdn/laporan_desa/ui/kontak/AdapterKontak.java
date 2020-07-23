@@ -29,7 +29,7 @@ public class AdapterKontak extends RecyclerView.Adapter<AdapterKontak.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemUserBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_kontak, parent, false);
+        ItemUserBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user, parent, false);
         return new MyViewHolder(binding);
     }
 

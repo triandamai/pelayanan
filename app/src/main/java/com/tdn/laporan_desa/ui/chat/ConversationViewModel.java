@@ -1,6 +1,7 @@
 package com.tdn.laporan_desa.ui.chat;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -42,6 +43,7 @@ public class ConversationViewModel extends ViewModel {
         this.apiService = ApiService.Factory.create();
         this.realm = Realm.getDefaultInstance();
         this.actionListener = actionListener;
+
         fetchfromApi();
         fetchfromLocal();
     }
@@ -53,7 +55,7 @@ public class ConversationViewModel extends ViewModel {
 
     public void fetchfromApi() {
 
-        Repository.getInstance(context).getAllConverastion(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, ""));
+        Repository.getInstance(context).getAllConversation(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, ""));
 
     }
 
@@ -69,31 +71,33 @@ public class ConversationViewModel extends ViewModel {
         if (!body.get().isEmpty()) {
             ConversationPostReq post = new ConversationPostReq();
             post.setBody(body.get().toString());
+            post.setIdDetailChat(String.valueOf(new Date().getTime()));
             post.setCreatedAt(String.valueOf(new Date().getTime()));
             post.setUpdatedAt(String.valueOf(new Date().getTime()));
             post.setFromSender(MyUser.getInstance(context).getUser().getIdUser());
-            post.setIdChat(String.valueOf(new Date().getTime()));
+            post.setIdChat(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, "kosong"));
             post.setStatusDetail(Static.STATUS_ADA);
-            post.setToReceiver(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID, "kosong"));
+            post.setMedia("kosong");
+            post.setToReceiver(MyUser.getInstance(context).getid(Static.KEY_LAST_CHAT_ID_USER, "kosong"));
             post.setType(Static.TIPE_CONV_TEXT);
-
+            Log.e("ini tes", post.toString());
             apiService.postConversation(post).enqueue(new Callback<ResponsePostPutDel>() {
                 @Override
                 public void onResponse(Call<ResponsePostPutDel> call, Response<ResponsePostPutDel> response) {
                     if (cek(response.code())) {
                         if (cek(response.body().getResponseCode())) {
-
+                            actionListener.onSuccess(response.body().getResponseMessage());
                         } else {
                             actionListener.onError(response.body().getResponseMessage());
                         }
                     } else {
-                        actionListener.onError(response.message());
+                        actionListener.onError(response.toString());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponsePostPutDel> call, Throwable t) {
-                    actionListener.onError(t.getLocalizedMessage());
+                    actionListener.onError(t.getMessage());
                 }
             });
         } else {

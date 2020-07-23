@@ -13,7 +13,7 @@
 
         <variable
             name="bind"
-            type="com.tdn.domain.realmobject.ChatObject" />
+            type="com.tdn.domain.realmobject.UserObject" />
     </data>
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginEnd="@dimen/padding_10"
-                setImageUrl="@{bind.senderMedia}"
+                setImageUrl="@{bind.media}"
                 android:src="@drawable/logo" />
 
 
@@ -56,14 +56,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{bind.senderNama}"
+                        android:text="@{bind.nama}"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/padding_10"
-                        android:text="@{`@`+bind.senderUsername}" />
+                        android:text="@{`@`+bind.username}" />
                 </LinearLayout>
 
                 <TextView

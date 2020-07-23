@@ -298,7 +298,7 @@ public class Repository {
 
                 if (cek(response.code())) {
                     Log.e(TAG, response.body().toString());
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+                    if (cek(response.body().getResponseCode()) || response.body().getData() != null) {
                         realm.beginTransaction();
                         realm.delete(ChatObject.class);
                         realm.commitTransaction();
@@ -364,7 +364,7 @@ public class Repository {
 
     }
 
-    public void getAllConverastion(String id) {
+    public void getAllConversation(String id) {
         service.getAllConversation().enqueue(new Callback<ResponseGetConversation>() {
             @Override
             public void onResponse(Call<ResponseGetConversation> call, Response<ResponseGetConversation> response) {
@@ -379,7 +379,7 @@ public class Repository {
                         realm.commitTransaction();
                         for (ConversationModel data : response.body().getData()) {
                             if (data.getStatusDetail().equalsIgnoreCase(Static.STATUS_ADA)) {
-                                ChatObject o = (ChatObject) data.ToObject();
+                                ConversationObject o = (ConversationObject) data.ToObject();
                                 Log.e("tes", o.toString());
                                 realm.executeTransaction(realm -> {
                                     realm.copyToRealmOrUpdate(o);
@@ -389,7 +389,7 @@ public class Repository {
 
                     } else {
                         realm.beginTransaction();
-                        realm.delete(ChatObject.class);
+                        realm.delete(ConversationObject.class);
                         realm.commitTransaction();
                     }
                 }

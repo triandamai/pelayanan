@@ -84,6 +84,7 @@ public class KontakFragment extends Fragment {
         builder.setItems(aksi, (dialog, which) -> {
             switch (which) {
                 case 0:
+                    mViewModel.idReceiver.set(adapterDataUser.getFromPosition(pos).getIdUser());
                     mViewModel.startChat();
                     break;
             }
