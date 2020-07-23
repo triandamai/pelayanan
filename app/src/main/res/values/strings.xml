@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Laporan_Desa</string>
+    <string name="app_name">Pengaduan Desa</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Desa Kedunggede</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
@@ -18,11 +18,11 @@
     <string name="username_atau_nip">"Masukkan Username "</string>
     <string name="password">Password</string>
     <string name="pengaduandesa">Pengaduan Desa Tanjung</string>
-    <string name="namadesa">Desa Harapan Maju</string>
+    <string name="namadesa">Desa Kedunggede</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="menu_chat">Chat</string>
+    <string name="menu_chat">Obrolan</string>
     <string name="menu_tambah_laporan">Tambah Laporan</string>
-    <string name="menu_komentar">Komentar</string>
+    <string name="menu_komentar">Komentari Laporan</string>
     <string name="menu_datauser">Data User</string>
     <string name="logout">Keluar</string>
     <string name="menu_tambah_user">Tambah User</string>

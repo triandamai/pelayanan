@@ -81,7 +81,10 @@ public class TambahLaporan extends BaseFragment {
         binding.judul.setOnClickListener(v -> {
             String[] item = {"Sosial", "Keamanan", "Pendidikan"};
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setItems(item, (dialog, which) -> mViewModel.judul.setValue(item[which])).create();
+            builder.setItems(item, (dialog, which) -> {
+                binding.judul.setText(item[which]);
+                mViewModel.judul.setValue(item[which]);
+            }).create();
             builder.show();
         });
         binding.isi.addTextChangedListener(new TextWatcher() {
