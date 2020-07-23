@@ -25,9 +25,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/rv"
+                android:layout_margin="@dimen/padding_10"
+                android:textSize="@dimen/dp_16"
+                android:text="Daftar User Obrolan" />
 
             <com.todkars.shimmer.ShimmerRecyclerView
                 android:id="@+id/rv"
@@ -37,7 +48,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:shimmer_recycler_item_count="5"
                 app:shimmer_recycler_layout="@layout/item_shimmer_laporan" />
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
