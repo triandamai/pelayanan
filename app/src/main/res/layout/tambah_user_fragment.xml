@@ -41,6 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{vm.nik}"
+                    android:inputType="number"
+                    android:maxLength="16"
                     android:hint="Masukkan Nik" />
 
                 <TextView
