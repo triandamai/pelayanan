@@ -222,6 +222,7 @@ public class TambahUser extends BaseFragment {
         @Override
         public void onStart() {
             binding.setIsLoading(true);
+            Snackbar.make(binding.getRoot(), "Proses..", BaseTransientBottomBar.LENGTH_LONG).show();
         }
 
         @Override

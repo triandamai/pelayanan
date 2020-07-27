@@ -92,6 +92,8 @@ public class TambahUserViewModel extends ViewModel {
                     listener.onError(t.getMessage());
                 }
             });
+        } else if (nik.getValue().length() < 16) {
+            listener.onError("Nik Harus 16 digit..");
         } else {
 
             listener.onError("Isi semua data");

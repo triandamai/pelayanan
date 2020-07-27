@@ -79,6 +79,10 @@ public class AdapterDataUser extends RecyclerView.Adapter<AdapterDataUser.MyView
         return user == null ? 0 : user.size();
     }
 
+    public UserObject getFromPosition(int pos) {
+        return user.get(pos);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ItemUserBinding binding;
 
