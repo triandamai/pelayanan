@@ -73,6 +73,8 @@ public class DataUser extends Fragment {
         @Override
         public void onSuccess(String message) {
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
+            mViewModel.fetchfromApi();
+            mViewModel.fetchfromLocal();
         }
 
         @Override

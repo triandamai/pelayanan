@@ -74,6 +74,10 @@ public class Repository {
                             });
                         }
 
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(UserObject.class);
+                        realm.commitTransaction();
                     }
                 }
             }
