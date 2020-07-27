@@ -96,5 +96,6 @@ public class DataUser extends Fragment {
         builder.setPositiveButton("Iya, hapus", (dialog, which) -> {
             mViewModel.hapus(o.getIdUser());
         });
+        builder.show();
     };
 }

@@ -43,6 +43,7 @@
                     android:text="@{vm.nik}"
                     android:inputType="number"
                     android:maxLength="16"
+                    android:maxLines="1"
                     android:hint="Masukkan Nik" />
 
                 <TextView
