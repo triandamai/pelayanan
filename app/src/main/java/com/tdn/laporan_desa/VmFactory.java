@@ -70,11 +70,9 @@ public class VmFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(HomePageViewModel.class)) {
             return (T) new HomePageViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(DataUserViewModel.class)) {
-            return (T) new DataUserViewModel(context);
+            return (T) new DataUserViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(TambahUserViewModel.class)) {
             return (T) new TambahUserViewModel(context, actionListener);
-        } else if (modelClass.isAssignableFrom(DataUserViewModel.class)) {
-            return (T) new DataUserViewModel(context);
         } else if (modelClass.isAssignableFrom(TambahLaporanViewModel.class)) {
             return (T) new TambahLaporanViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(TambahUserViewModel.class)) {
