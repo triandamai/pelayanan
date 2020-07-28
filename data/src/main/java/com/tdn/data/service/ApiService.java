@@ -19,11 +19,11 @@ import com.tdn.domain.serialize.res.ResponsePostPutDel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -77,8 +77,8 @@ public interface ApiService {
     Call<ResponsePostPutDel> putUser(@Body UserModel userModel);
 
     @Headers({accept_json, content_type, api_key})
-    @DELETE("user/users")
-    Call<ResponsePostPutDel> deleteUser(@Path("id") String id);
+    @POST("user/users_hapus")
+    Call<ResponsePostPutDel> deleteUser(@Field("id") String id);
 
     @Headers({accept_json, content_type, api_key})
     @POST("pengaduan/laporan")
