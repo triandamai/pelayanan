@@ -10,6 +10,7 @@ import com.tdn.domain.model.KomentarModel;
 import com.tdn.domain.model.UserModel;
 import com.tdn.domain.serialize.req.LaporanPostReq;
 import com.tdn.laporan_desa.auth.LoginViewModel;
+import com.tdn.laporan_desa.callback.ActionChangePassListener;
 import com.tdn.laporan_desa.callback.ActionListener;
 import com.tdn.laporan_desa.ui.chat.ChatViewModel;
 import com.tdn.laporan_desa.ui.chat.ConversationViewModel;
@@ -24,6 +25,7 @@ public class VmFactory implements ViewModelProvider.Factory {
     private Context context;
     private String id = "";
     private ActionListener actionListener;
+    private ActionChangePassListener actionChangePassListener;
     private LaporanPostReq laporanPostReq;
     private UserModel userModel;
     private KomentarModel komentarModel;
@@ -35,6 +37,12 @@ public class VmFactory implements ViewModelProvider.Factory {
     public VmFactory(@NonNull Context context, ActionListener actionListener) {
         this.context = context;
         this.actionListener = actionListener;
+    }
+
+    public VmFactory(@NonNull Context context, ActionListener actionListener, ActionChangePassListener actionChangePassListener) {
+        this.context = context;
+        this.actionListener = actionListener;
+        this.actionChangePassListener = actionChangePassListener;
     }
 
     public VmFactory(@NonNull Context context, ActionListener actionListener, LaporanPostReq laporanPostReq) {
@@ -66,7 +74,7 @@ public class VmFactory implements ViewModelProvider.Factory {
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-            return (T) new LoginViewModel(context, actionListener);
+            return (T) new LoginViewModel(context, actionListener, actionChangePassListener);
         } else if (modelClass.isAssignableFrom(HomePageViewModel.class)) {
             return (T) new HomePageViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(DataUserViewModel.class)) {

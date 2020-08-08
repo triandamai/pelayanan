@@ -87,6 +87,13 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:text="@={vm.password}" />
 
+            <TextView
+                android:id="@+id/tv_lupa_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lupa Password?"
+                android:layout_marginTop="@dimen/padding_10" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

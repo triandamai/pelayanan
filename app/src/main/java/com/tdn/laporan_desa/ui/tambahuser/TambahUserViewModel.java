@@ -54,7 +54,14 @@ public class TambahUserViewModel extends ViewModel {
     public void simpan() {
         listener.onStart();
 
-        if (!nama.getValue().isEmpty()) {
+        if (!nama.getValue().isEmpty() &&
+                !alamat.getValue().isEmpty() &&
+                !level.getValue().isEmpty() &&
+                !nik.getValue().isEmpty() &&
+                !tanggallahir.getValue().isEmpty() &&
+                !password.getValue().isEmpty() &&
+                !username.getValue().isEmpty() &&
+                !tempatlahir.getValue().isEmpty() && !media.getValue().isEmpty()) {
             UserPostReq userPostReq = new UserPostReq();
             userPostReq.setIdUser("tes");
             userPostReq.setNama(nama.getValue());
@@ -62,7 +69,7 @@ public class TambahUserViewModel extends ViewModel {
             userPostReq.setLevel(level.getValue());
             userPostReq.setNik(nik.getValue());
             userPostReq.setTanggalLahir(tanggallahir.getValue());
-            userPostReq.setPassword(nik.getValue());
+            userPostReq.setPassword(password.getValue());
             userPostReq.setUsername(username.getValue());
             userPostReq.setTempatLahir(tempatlahir.getValue());
             userPostReq.setStatusUser("ada");

@@ -15,6 +15,7 @@ import com.tdn.domain.serialize.res.ResponseGetLaporan;
 import com.tdn.domain.serialize.res.ResponseGetUser;
 import com.tdn.domain.serialize.res.ResponsePostLogin;
 import com.tdn.domain.serialize.res.ResponsePostPutDel;
+import com.tdn.domain.serialize.res.ResponseUpdatePassword;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,10 +30,11 @@ import retrofit2.http.Query;
 public interface ApiService {
     //String BASE_URL = "http://192.168.1.19/laporan-karyawan-api/v1/";
 //    String BASE = "http://192.168.100.5/apipengaduan/";
-    String BASE = "https://apipengaduan.000webhostapp.com/";
+    // String BASE = "https://apipengaduan.000webhostapp.com/";
+    String BASE = "http://192.168.100.5/apipengaduan/";
     String BASE_URL = BASE + "api/v1/";
     String BASE_URL_IMAGE = BASE + "assets/pengaduan/";
-    // String BASE_URL = "http://192.168.100.5/apipengaduan/api/v1/";
+
     String USER_KEY = "";
 
     String accept_urlencoded = "Content-Type: application/x-www-form-urlencoded";
@@ -71,6 +73,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @POST("user/users")
     Call<ResponsePostPutDel> postUser(@Body UserPostReq userModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("user/update")
+    Call<ResponseUpdatePassword> updatePass(@Field("username") String username);
 
     @Headers({accept_json, content_type, api_key})
     @PUT("user/users/{id}")

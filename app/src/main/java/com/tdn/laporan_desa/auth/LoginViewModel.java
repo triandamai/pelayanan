@@ -11,6 +11,8 @@ import com.tdn.data.persistensi.MyUser;
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.serialize.req.LoginPostReq;
 import com.tdn.domain.serialize.res.ResponsePostLogin;
+import com.tdn.domain.serialize.res.ResponseUpdatePassword;
+import com.tdn.laporan_desa.callback.ActionChangePassListener;
 import com.tdn.laporan_desa.callback.ActionListener;
 
 import retrofit2.Call;
@@ -24,15 +26,43 @@ public class LoginViewModel extends ViewModel {
     private Context context;
     private ApiService apiService;
     private ActionListener listener;
+    private ActionChangePassListener passListener;
     public ObservableField<Boolean> isLoading = new ObservableField<>();
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> username = new ObservableField<>();
 
-    public LoginViewModel(Context context, ActionListener actionListener) {
+    public LoginViewModel(Context context, ActionListener actionListener, ActionChangePassListener actionChangePassListener) {
         this.context = context;
         this.apiService = ApiService.Factory.create();
         this.isLoading.set(false);
         this.listener = actionListener;
+        this.passListener = actionChangePassListener;
+    }
+
+    public void lupa(String username) {
+        passListener.onStart();
+        apiService.updatePass(username).enqueue(new Callback<ResponseUpdatePassword>() {
+            @Override
+            public void onResponse(Call<ResponseUpdatePassword> call, Response<ResponseUpdatePassword> response) {
+                if (cek(response.code())) {
+                    Log.e(TAG, response.body().toString());
+                    if (cek(response.body().getResponseCode())) {
+
+                        passListener.onSuccess(response.body().getResponseMessage(), response.body().getData());
+                    } else {
+                        passListener.onError(response.body().getResponseMessage());
+                    }
+                } else {
+                    passListener.onError(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUpdatePassword> call, Throwable t) {
+                passListener.onError(t.getMessage());
+            }
+        });
+
     }
 
     public void login(View v) {
