@@ -21,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -31,14 +32,16 @@ public interface ApiService {
     //String BASE_URL = "http://192.168.1.19/laporan-karyawan-api/v1/";
 //    String BASE = "http://192.168.100.5/apipengaduan/";
     // String BASE = "https://apipengaduan.000webhostapp.com/";
-    String BASE = "http://192.168.100.5/apipengaduan/";
+    String BASE = "http://10.200.26.236/apipengaduan/";
     String BASE_URL = BASE + "api/v1/";
     String BASE_URL_IMAGE = BASE + "assets/pengaduan/";
 
     String USER_KEY = "";
 
-    String accept_urlencoded = "Content-Type: application/x-www-form-urlencoded";
+    String content_type_url = "Content-Type: application/x-www-form-urlencoded";
+    String accept_url = "Accept: application/x-www-form-urlencoded";
     String accept_json = "Accept: application/json;charset=utf-8";
+
     String content_type = "Content-Type: application/json;charset=utf-8";
     String api_key = "X-API-KEY: your api key";
 
@@ -74,7 +77,8 @@ public interface ApiService {
     @POST("user/users")
     Call<ResponsePostPutDel> postUser(@Body UserPostReq userModel);
 
-    @Headers({accept_json, content_type, api_key})
+    @Headers({content_type_url, accept_url, api_key})
+    @FormUrlEncoded
     @POST("user/update")
     Call<ResponseUpdatePassword> updatePass(@Field("username") String username);
 
