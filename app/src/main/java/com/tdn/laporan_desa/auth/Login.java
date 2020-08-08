@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private LoginViewModel loginViewModel;
     private MaterialAlertDialogBuilder alertDialog;
+    private MaterialAlertDialogBuilder alertDialog2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class Login extends AppCompatActivity {
                 InputType.TYPE_CLASS_TEXT);
 
         alertDialog = new MaterialAlertDialogBuilder(this, R.style.dialog);
+        alertDialog2 = new MaterialAlertDialogBuilder(this, R.style.dialog);
         alertDialog.create();
         alertDialog.setTitle("Lupa Password");
         alertDialog.setView(input);
@@ -65,19 +67,20 @@ public class Login extends AppCompatActivity {
 
         @Override
         public void onSuccess(String message, String hash) {
-            alertDialog.setTitle("Password baru anda");
-            alertDialog.setMessage(hash);
-            alertDialog.setCancelable(false);
-            alertDialog.setPositiveButton("Copy", (dialog, which) -> {
+            alertDialog2.setTitle("Password baru anda");
+            alertDialog2.setMessage(hash);
+            alertDialog2.setCancelable(false);
+            alertDialog2.setPositiveButton("Copy", (dialog, which) -> {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("password_laporan", hash);
                 clipboard.setPrimaryClip(clip);
             });
-            alertDialog.show();
+            alertDialog2.show();
         }
 
         @Override
         public void onError(String message) {
+
             alertDialog.setTitle("Gagal..");
             alertDialog.setMessage(message);
             alertDialog.setPositiveButton("Oke", (dialog, which) -> {
