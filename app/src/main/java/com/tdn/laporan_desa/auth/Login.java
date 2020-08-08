@@ -81,12 +81,12 @@ public class Login extends AppCompatActivity {
         @Override
         public void onError(String message) {
 
-            alertDialog.setTitle("Gagal..");
-            alertDialog.setMessage(message);
-            alertDialog.setPositiveButton("Oke", (dialog, which) -> {
+            alertDialog2.setTitle("Gagal..");
+            alertDialog2.setMessage(message);
+            alertDialog2.setPositiveButton("Oke", (dialog, which) -> {
                 dialog.dismiss();
             });
-            alertDialog.show();
+            alertDialog2.show();
         }
     };
     private ActionListener actionListener = new ActionListener() {

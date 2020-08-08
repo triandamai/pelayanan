@@ -76,6 +76,13 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<ResponsePostLogin> call, Response<ResponsePostLogin> response) {
                 isLoading.set(false);
                 Log.e(TAG, response.toString());
+//                String responseX = "";
+//                try {
+//                    responseX = response.errorBody().string();
+//                    longLog(responseX);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 if (cek(response.code())) {
                     Log.e(TAG, response.body().toString());
                     if (cek(response.body().getResponseCode())) {

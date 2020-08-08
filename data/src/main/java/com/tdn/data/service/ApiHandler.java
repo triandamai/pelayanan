@@ -63,4 +63,22 @@ public class ApiHandler {
         }
 
     }
+        /*
+    * String responseX = "";
+    * try {
+            responseX = response.errorBody().string();
+            longLog(responseX);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+
+    * */
+
+    public static void longLog(String str) {
+        if (str.length() > 4000) {
+            Log.e("BookingPresenter", str.substring(0, 4000));
+            longLog(str.substring(4000));
+        } else
+            Log.e("BookingPresenter", str);
+    }
 }
